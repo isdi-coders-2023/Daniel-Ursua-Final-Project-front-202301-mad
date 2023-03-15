@@ -1,5 +1,4 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../models/user.model";
 import { State, reducer, LoginData } from "./user.slice";
 
 const mockUser = {
