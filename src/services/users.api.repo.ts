@@ -1,4 +1,4 @@
-import { ProtoUser, User } from "../models/user.model";
+import { ProtoUser } from "../models/user.model";
 import { LoginData } from "../reducer/user.slice";
 
 export interface UserRepoStructure {
@@ -9,10 +9,10 @@ export interface UserRepoStructure {
 export class UserApiRepo {
   url: string;
   constructor() {
-    this.url = "http://localhost:4500/users";
+    this.url = "http://localhost:4500/users/";
   }
   async loginUser(user: ProtoUser): Promise<LoginData> {
-    const resp = await fetch(this.url, {
+    const resp = await fetch(this.url + "login", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {
