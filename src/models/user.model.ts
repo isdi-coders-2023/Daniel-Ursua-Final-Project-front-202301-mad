@@ -1,21 +1,14 @@
 import { Plant } from "./plant.model";
 
-export type User = { id: string } & ProtoUser;
-
-export type ProtoUser = {
+export type hasId = {
+  id: string;
+};
+export type protoUser = {
   name: string;
-  age: string;
-  gender: string;
   email: string;
   passwd: string;
-  friends: User[];
-  enemies: User[];
+  plantList: Plant[];
+  myPlants: Plant[];
 };
 
-export type State = {
-  userLogged: {
-    token: string;
-    user: User;
-  } | null;
-  plants: Plant[];
-};
+export type User = hasId & protoUser;
