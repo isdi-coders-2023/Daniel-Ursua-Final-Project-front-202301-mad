@@ -20,7 +20,7 @@ describe("Given the users api repo", () => {
   describe("When we call the register method", () => {
     test("if the answer is not ok, then it should throw an error", async () => {
       global.fetch = jest.fn().mockResolvedValue("error");
-      const result = repo.registerUser(mockUser);
+      const result = repo.registerUserRepo(mockUser);
       await expect(result).rejects.toThrow();
     });
     test("If the answer is ok, then it should return the login info", async () => {
@@ -28,14 +28,14 @@ describe("Given the users api repo", () => {
         ok: true,
         json: jest.fn().mockResolvedValue(mockResp),
       });
-      const result = await repo.registerUser(mockUser);
+      const result = await repo.registerUserRepo(mockUser);
       expect(result).toEqual(mockResp);
     });
   });
   describe("When we call the login user method", () => {
     test("If the answer is not ok, then it should throw an error", async () => {
       global.fetch = jest.fn().mockResolvedValue("error");
-      const result = repo.loginUser(mockUser);
+      const result = repo.loginUserRepo(mockUser);
       await expect(result).rejects.toThrow();
     });
     test("If the answer is ok, then it should return the login info", async () => {
@@ -43,7 +43,7 @@ describe("Given the users api repo", () => {
         ok: true,
         json: jest.fn().mockResolvedValue(mockResp),
       });
-      const result = await repo.loginUser(mockUser);
+      const result = await repo.loginUserRepo(mockUser);
       expect(result).toEqual(mockResp);
     });
   });

@@ -2,7 +2,7 @@ import { User } from "../models/user.model";
 import { LoginData } from "../reducer/user.slice";
 
 export interface UserRepoStructure {
-  registerUser(user: Partial<User>): Promise<User>;
+  registerUserRepo(user: Partial<User>): Promise<User>;
   loginUser(user: Partial<User>): Promise<LoginData>;
 }
 
@@ -11,7 +11,7 @@ export class UsersApiRepo {
   constructor() {
     this.url = "http://localhost:4500/users/";
   }
-  async registerUser(user: Partial<User>): Promise<User> {
+  async registerUserRepo(user: Partial<User>): Promise<User> {
     const resp = await fetch(this.url + "register", {
       method: "POST",
       body: JSON.stringify(user),
@@ -25,7 +25,7 @@ export class UsersApiRepo {
 
     return data;
   }
-  async loginUser(user: Partial<User>): Promise<LoginData> {
+  async loginUserRepo(user: Partial<User>): Promise<LoginData> {
     const resp = await fetch(this.url + "login", {
       method: "POST",
       body: JSON.stringify(user),
