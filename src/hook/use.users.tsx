@@ -9,17 +9,17 @@ export function useUsers(repo: UsersApiRepo) {
   const dispatch = useDispatch<AppDispatch>();
   const loginUser = async (info: Partial<User>) => {
     try {
-      const data = await repo.loginUser(info);
+      const data = await repo.loginUserRepo(info);
       dispatch(login(data));
     } catch (error) {
-      console.error((error as Error).message);
+      console.error("error");
     }
   };
   const register = async (info: Partial<User>) => {
     try {
-      await repo.registerUser(info);
+      await repo.registerUserRepo(info);
     } catch (error) {
-      console.error((error as Error).message);
+      console.error("error");
     }
   };
   return {

@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-render-in-setup */
 /* eslint-disable testing-library/no-unnecessary-act */
 import { useUsers } from "./use.users";
-import { act, render, screen } from "@testing-library/react";
+import { act, render, renderHook, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { User } from "../models/user.model";
@@ -12,17 +12,17 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
   let mockPayload: User;
   let mockRepo: UsersApiRepo;
 
+  mockPayload = {
+    username: "test",
+    email: "test",
+  } as unknown as User;
+
+  mockRepo = {
+    registerUserRepo: jest.fn().mockRejectedValue("Error"),
+    loginUserRepo: jest.fn(),
+  } as unknown as UsersApiRepo;
+
   beforeEach(async () => {
-    mockPayload = {
-      username: "test",
-      email: "test",
-    } as unknown as User;
-
-    mockRepo = {
-      registerUser: jest.fn(),
-      loginUser: jest.fn(),
-    } as unknown as UsersApiRepo;
-
     const TestComponent = function () {
       const { register, loginUser } = useUsers(mockRepo);
 
@@ -54,7 +54,7 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
     test("Then, the registerUser function should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[0]));
-      expect(mockRepo.registerUser).toHaveBeenCalled();
+      expect(mockRepo.registerUserRepo).toHaveBeenCalled();
     });
   });
 
@@ -62,7 +62,7 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
     test("Then, the loginUser function should be called", async () => {
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[1]));
-      expect(mockRepo.loginUser).toHaveBeenCalled();
+      expect(mockRepo.loginUserRepo).toHaveBeenCalled();
     });
   });
 });
