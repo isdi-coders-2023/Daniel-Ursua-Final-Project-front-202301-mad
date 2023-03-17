@@ -10,7 +10,7 @@ import { RegUserForm } from "./reg.user.forms";
 
 jest.mock("../../hook/use.users");
 
-describe("Given LogUserForm component", () => {
+describe("Given RegUserForm component", () => {
   beforeEach(async () => {
     await act(async () => {
       (useUsers as jest.Mock).mockReturnValue({
