@@ -12,7 +12,7 @@ export function useUsers(repo: UsersApiRepo) {
       const data = await repo.loginUserRepo(info);
       dispatch(login(data));
     } catch (error) {
-      console.error("error");
+      console.error("Error");
     }
   };
   const register = async (info: Partial<User>) => {
