@@ -1,17 +1,44 @@
-import { render, screen } from "@testing-library/react";
-import { Home } from "./home";
+/* eslint-disable testing-library/no-unnecessary-act */
+/* eslint-disable testing-library/no-render-in-setup */
+import { render, screen, waitFor } from "@testing-library/react";
+import Home from "./home";
+import { MemoryRouter as Router } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
-describe("Given the home page", () => {
-  describe("When it is render", () => {
+const mockNavigate = jest.fn();
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockNavigate,
+}));
+describe("Given the home component", () => {
+  beforeEach(() => {
     render(
-      <>
-        <Home></Home>
-      </>
+      <Router>
+        <Home />
+      </Router>
     );
-    test("Then it should return the login and register button", () => {
-      const element = screen.getAllByRole("button");
-      expect(element[0]).toBeInTheDocument();
-      expect(element[1]).toBeInTheDocument();
+  });
+
+  describe("When it is render", () => {
+    test("It should print two buttons", () => {
+      const buttons = screen.getAllByRole("button");
+      expect(buttons.length).toBe(2);
+    });
+  });
+  describe("When the user click the login button", () => {
+    test("It should go to login page", async () => {
+      const buttons = screen.getAllByRole("button");
+      userEvent.click(buttons[0]);
+      await waitFor(() => expect(mockNavigate).toHaveBeenCalledWith("/login"));
+    });
+  });
+  describe("When the user click the register button", () => {
+    test("It should go to register page", async () => {
+      const buttons = screen.getAllByRole("button");
+      userEvent.click(buttons[1]);
+      await waitFor(() =>
+        expect(mockNavigate).toHaveBeenCalledWith("/register")
+      );
     });
   });
 });

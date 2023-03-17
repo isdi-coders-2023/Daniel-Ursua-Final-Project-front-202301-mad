@@ -2,14 +2,17 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
-import { LoginPage } from "./login";
+import LoginPage from "./login";
+import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Given the login page", () => {
   describe("When it is render", () => {
     beforeEach(() => {
       render(
         <Provider store={store}>
-          <LoginPage />
+          <Router>
+            <LoginPage />
+          </Router>
         </Provider>
       );
     });
@@ -17,7 +20,7 @@ describe("Given the login page", () => {
     test("Then it should print three headings", () => {
       const elements = screen.getAllByRole("heading");
 
-      expect(elements.length).toBe(3);
+      expect(elements.length).toBe(2);
     });
   });
 });

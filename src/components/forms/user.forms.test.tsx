@@ -25,11 +25,6 @@ describe("Given LogUserForm component", () => {
   });
 
   describe("When the component is rendered", () => {
-    test("Then the heading <h2> should be in the document", () => {
-      const element = screen.getByRole("heading");
-      expect(element).toBeInTheDocument();
-    });
-
     test("Then the username <input> should be in the document", () => {
       const inputs = screen.getAllByRole("textbox");
       expect(inputs[0]).toBeInTheDocument();

@@ -22,7 +22,6 @@ export function LogUserForm() {
 
   return (
     <>
-      <h2>Welcome to the plantApp</h2>
       <form className="login-form" data-testid="form" onSubmit={handleSubmit}>
         <input
           type="text"

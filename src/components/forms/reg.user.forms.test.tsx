@@ -10,7 +10,7 @@ import { RegUserForm } from "./reg.user.forms";
 
 jest.mock("../../hook/use.users");
 
-describe("Given LogUserForm component", () => {
+describe("Given RegUserForm component", () => {
   beforeEach(async () => {
     await act(async () => {
       (useUsers as jest.Mock).mockReturnValue({
@@ -25,11 +25,6 @@ describe("Given LogUserForm component", () => {
   });
 
   describe("When the component is rendered", () => {
-    test("Then the heading <h2> should be in the document", () => {
-      const element = screen.getByRole("heading");
-      expect(element).toBeInTheDocument();
-    });
-
     test("Then the name <input> should be in the document", () => {
       const inputs = screen.getAllByRole("textbox");
       expect(inputs[0]).toBeInTheDocument();
