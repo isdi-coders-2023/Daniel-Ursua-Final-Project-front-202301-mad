@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { Home } from "./home";
+import Home from "./home";
 
 describe("Given the home page", () => {
   describe("When it is render", () => {

@@ -1,12 +1,14 @@
-export const Home = () => {
+import { Link } from "react-router-dom";
+
+export default function Home() {
   return (
     <>
       <button>
-        <a href="../pages/login.tsx">Log in</a>
+        <Link to="../login/login.tsx">Login</Link>
       </button>
       <button>
-        <a href="../pages/register.tsx">Register</a>
+        <Link to="../register/register.tsx">Register</Link>
       </button>
     </>
   );
-};
+}

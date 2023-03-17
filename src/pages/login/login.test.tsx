@@ -2,7 +2,7 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
-import { LoginPage } from "./login";
+import LoginPage from "./login";
 
 describe("Given the login page", () => {
   describe("When it is render", () => {
