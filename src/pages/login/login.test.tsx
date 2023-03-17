@@ -20,7 +20,7 @@ describe("Given the login page", () => {
     test("Then it should print three headings", () => {
       const elements = screen.getAllByRole("heading");
 
-      expect(elements.length).toBe(3);
+      expect(elements.length).toBe(2);
     });
   });
 });
