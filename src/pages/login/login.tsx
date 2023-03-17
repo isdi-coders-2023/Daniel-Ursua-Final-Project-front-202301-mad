@@ -8,8 +8,7 @@ export default function LoginPage() {
       <h2>Login to your account</h2>
       <LogUserForm></LogUserForm>
       <p>
-        Don't have an account?{" "}
-        <Link to="../register/register.tsx">Sign up</Link>
+        Don't have an account? <Link to="/register">Sign up</Link>
       </p>
     </>
   );
