@@ -1,5 +1,4 @@
 import "./App.css";
-import { LogUserForm } from "./components/forms/user.forms";
 
 function App() {
   return (
