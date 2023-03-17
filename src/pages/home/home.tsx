@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const navigate = useNavigate();
+  const handleLogin = (): void => {
+    navigate("/login");
+  };
+  const handleRegister = (): void => {
+    navigate("/register");
+  };
+
   return (
     <>
-      <button>
-        <Link to="../login/login.tsx">Login</Link>
-      </button>
-      <button>
-        <Link to="../register/register.tsx">Register</Link>
-      </button>
+      <button onClick={handleLogin}>Login</button>
+      <button onClick={handleRegister}> Register</button>
     </>
   );
 }
