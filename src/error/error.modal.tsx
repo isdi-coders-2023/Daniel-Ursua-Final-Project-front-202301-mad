@@ -21,5 +21,3 @@ export const ErrorModal: React.FC<Props> = ({ codeError, error, onClose }) => {
     </Modal>
   );
 };
-
-export default ErrorModal;
