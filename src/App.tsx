@@ -1,11 +1,11 @@
 import "./App.css";
+import { Home } from "./pages/home";
 
-function App() {
+export function App() {
   return (
     <>
       <h1>PlantApp</h1>
+      <Home></Home>
     </>
   );
 }
-
-export default App;
