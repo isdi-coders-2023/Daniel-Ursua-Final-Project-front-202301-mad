@@ -11,6 +11,7 @@ export default function Home() {
 
   return (
     <>
+      <h1>PlantApp</h1>
       <button onClick={handleLogin}>Login</button>
       <button onClick={handleRegister}> Register</button>
     </>
