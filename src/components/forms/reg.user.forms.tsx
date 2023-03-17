@@ -23,7 +23,6 @@ export function RegUserForm() {
 
   return (
     <>
-      <h2>Welcome to the plantApp</h2>
       <form className="reg-form" data-testid="form" onSubmit={handleSubmit}>
         <input
           type="text"
