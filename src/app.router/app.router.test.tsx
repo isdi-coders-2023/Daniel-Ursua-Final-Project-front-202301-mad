@@ -18,16 +18,16 @@ describe("Given the app router component", () => {
     );
   };
   describe('When it is render and the path is "/"', () => {
-    test('Then, the "login" button should be in the document', async () => {
+    test("Then, a h1 should be in the document", async () => {
       prepareTestFunction(0);
-      const element = await screen.findAllByRole("button");
-      expect(element.length).toBe(2);
+      const element = await screen.findByRole("heading");
+      expect(element).toBeInTheDocument();
     });
   });
 
   describe('When it is render and the path is "/login"', () => {
     test("Then, two headings should be in the document", async () => {
-      prepareTestFunction(1);
+      await waitFor(async () => prepareTestFunction(1));
       const element = await screen.findAllByRole("heading");
       expect(element.length).toBe(2);
     });
