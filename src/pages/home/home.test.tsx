@@ -2,12 +2,12 @@
 /* eslint-disable testing-library/no-render-in-setup */
 import { render, screen, waitFor } from "@testing-library/react";
 import Home from "./home";
-import { MemoryRouter as Router, useNavigate } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
 
 const mockNavigate = jest.fn();
 jest.mock("react-router-dom", () => ({
-  ...(jest.requireActual("react-router-dom") as any),
+  ...jest.requireActual("react-router-dom"),
   useNavigate: () => mockNavigate,
 }));
 describe("Given the home component", () => {
@@ -42,23 +42,3 @@ describe("Given the home component", () => {
     });
   });
 });
-
-// jest.mock("react-router-dom");
-
-// describe("Given the home page", () => {
-//   describe("When it is render", () => {
-//     const mockNavigate = jest.fn();
-//     beforeEach(() => {
-
-//     });
-//     describe("When the user click on login button", () => {
-//       test("Then, handlelogin should go to login", () => {
-
-//         const button = screen.getAllByRole("button");
-//         userEvent.click(button[0]);
-
-//         expect(mockNavigate).toHaveBeenCalled();
-//       });
-//     });
-//   });
-// });
