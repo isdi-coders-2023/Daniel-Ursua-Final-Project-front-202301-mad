@@ -1,11 +1,13 @@
 import "./App.css";
-import Home from "./pages/home/home";
+import { AppRouter } from "./app.router/app.router";
 
 export default function App() {
   return (
     <>
-      <h1>PlantApp</h1>
-      <Home></Home>
+      <header>
+        <h1>PlantApp</h1>
+      </header>
+      <AppRouter></AppRouter>
     </>
   );
 }
