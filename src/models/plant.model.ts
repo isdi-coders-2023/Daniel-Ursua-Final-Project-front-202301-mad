@@ -1,18 +1,14 @@
-import { User } from "./user.model";
-
-export type Grade = "Low" | "Medium" | "High";
-export type Ubication = "Indoor" | "Outdoor" | "Both";
+export type Ubication = "indoor" | "outdoor" | "both";
 
 export type ProtoPlant = {
   photo: string;
   name: string;
   ubication: Ubication;
-  height: number;
-  lightness: Grade;
-  humidity: Grade;
-  difficult: Grade;
-  animalFriendly: boolean;
-  creator: User;
+  height: string;
+  lightness: string;
+  humidity: string;
+  difficult: string;
+  petFriendly: boolean;
 };
 
 export type PlantList = {
