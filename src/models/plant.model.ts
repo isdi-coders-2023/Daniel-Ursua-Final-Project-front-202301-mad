@@ -3,7 +3,7 @@ import { User } from "./user.model";
 export type Grade = "Low" | "Medium" | "High";
 export type Ubication = "Indoor" | "Outdoor" | "Both";
 
-export type Plant = {
+export type ProtoPlant = {
   photo: string;
   name: string;
   ubication: Ubication;
@@ -20,3 +20,7 @@ export type PlantList = {
   name: string;
   ubication: Ubication;
 };
+export type hasId = {
+  id: string;
+};
+export type Plant = hasId & ProtoPlant;
