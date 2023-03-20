@@ -1,6 +1,6 @@
 import { AddPlantForm } from "../../components/forms/add.forms";
 
-export default function Home() {
+export default function AddPage() {
   return (
     <>
       <h1>Add</h1>
