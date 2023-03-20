@@ -7,7 +7,7 @@ export function usePlants(repo: PlantsApiRepo) {
   const plants = useSelector((state: RootState) => state);
   const addPlant = async (info: ProtoPlant) => {
     try {
-      const data = await repo.addPlantRepo(info);
+      await repo.addPlantRepo(info);
     } catch (error) {
       console.error("Error");
     }
