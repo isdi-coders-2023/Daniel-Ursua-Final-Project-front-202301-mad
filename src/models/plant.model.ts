@@ -1,5 +1,3 @@
-import { User } from "./user.model";
-
 export type Ubication = "indoor" | "outdoor" | "both";
 
 export type ProtoPlant = {
