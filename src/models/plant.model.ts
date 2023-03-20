@@ -14,3 +14,9 @@ export type Plant = {
   animalFriendly: boolean;
   creator: User;
 };
+
+export type PlantList = {
+  photo: string;
+  name: string;
+  ubication: Ubication;
+};
