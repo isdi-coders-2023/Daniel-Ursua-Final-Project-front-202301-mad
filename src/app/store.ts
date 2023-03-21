@@ -1,10 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { reducer } from "../reducer/user.slice";
+import { reducer as userRed } from "../reducer/user.slice";
+import { reducer as errorRed } from "../reducer/error.slice";
+import { reducer as plantRed } from "../reducer/plant.slice";
 
 export const store = configureStore({
   reducer: {
-    users: reducer,
-    plants: reducer,
+    users: userRed,
+    plants: plantRed,
+    errors: errorRed,
   },
 });
 
