@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ErrorMessage, reducer, State } from "./error.slice";
+import { reducer, State } from "./error.slice";
 
 const mockError = "test error";
 
