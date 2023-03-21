@@ -1,11 +1,11 @@
-import { AddPlantForm } from "../../components/forms/add.forms";
+import { PlantForm } from "../../components/forms/plant.form";
 
 export default function AddPage() {
   return (
     <>
       <h1>Add</h1>
       <h2>a new plant</h2>
-      <AddPlantForm></AddPlantForm>
+      <PlantForm></PlantForm>
     </>
   );
 }
