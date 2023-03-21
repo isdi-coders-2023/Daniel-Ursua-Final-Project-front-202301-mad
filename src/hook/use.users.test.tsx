@@ -11,6 +11,17 @@ import { store } from "../app/store";
 describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent", () => {
   let mockPayload: User;
   let mockRepo: UsersApiRepo;
+  // Mock del dispatch
+  // let mockDispatch = jest.fn();
+  // jest.mock("../app/store", () => ({
+  //   ...jest.requireActual,
+  //   dispatch: mockDispatch,
+  // }));
+
+  // jest.mock("react-redux", () => ({
+  //   // ...jest.requireActual,
+  //   useDispatch: mockDispatch,
+  // }));
 
   mockPayload = {
     username: "test",
@@ -18,11 +29,14 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
   } as unknown as User;
 
   mockRepo = {
-    registerUserRepo: jest.fn().mockRejectedValue("Error"),
+    registerUserRepo: jest.fn(),
     loginUserRepo: jest.fn(),
   } as unknown as UsersApiRepo;
 
   beforeEach(async () => {
+    //Mock del dispatch
+    //mockDispatch = jest.fn();
+
     const TestComponent = function () {
       const { register, loginUser } = useUsers(mockRepo);
 
@@ -56,6 +70,15 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
       await act(async () => userEvent.click(elements[0]));
       expect(mockRepo.registerUserRepo).toHaveBeenCalled();
     });
+    test("If the repo throw an error, the setError should be called", async () => {
+      (mockRepo.registerUserRepo as jest.Mock).mockRejectedValue(
+        new Error("test")
+      );
+      const elements = await screen.findAllByRole("button");
+      await act(async () => userEvent.click(elements[0]));
+      const result = store.getState().errors.message;
+      expect(result).toBe("test");
+    });
   });
 
   describe("When the TestComponent is rendered and the login button is clicked", () => {
@@ -63,6 +86,15 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
       const elements = await screen.findAllByRole("button");
       await act(async () => userEvent.click(elements[1]));
       expect(mockRepo.loginUserRepo).toHaveBeenCalled();
+    });
+    test("If the repo throw an error, the setError should be called", async () => {
+      (mockRepo.loginUserRepo as jest.Mock).mockRejectedValue(
+        new Error("test")
+      );
+      const elements = await screen.findAllByRole("button");
+      await act(async () => userEvent.click(elements[1]));
+      const result = store.getState().errors.message;
+      expect(result).toBe("test");
     });
   });
 });
