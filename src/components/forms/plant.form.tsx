@@ -4,7 +4,7 @@ import { usePlants } from "../../hook/use.plants";
 import { ProtoPlant, Ubication } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 
-export function AddPlantForm() {
+export function PlantForm() {
   const repo = useMemo(() => new PlantsApiRepo(), []);
   const { addPlant } = usePlants(repo);
 

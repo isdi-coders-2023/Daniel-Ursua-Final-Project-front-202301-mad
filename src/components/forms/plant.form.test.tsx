@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "../../app/store";
 import { usePlants } from "../../hook/use.plants";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
-import { AddPlantForm } from "./add.forms";
+import { PlantForm } from "./plant.form";
 
 jest.mock("../../hook/use.plants");
 
@@ -18,7 +18,7 @@ describe("Given AddPlantForm component", () => {
       });
       render(
         <Provider store={store}>
-          <AddPlantForm></AddPlantForm>
+          <PlantForm></PlantForm>
         </Provider>
       );
     });
