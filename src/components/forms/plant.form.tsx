@@ -44,12 +44,18 @@ export function PlantForm() {
           name="password"
           role="textbox"
         />
-        <input type="radio" name="ubication" value="indoor" />
-        <label htmlFor="indoor">Indoor</label>
-        <input type="radio" name="ubication" value="outdoor" />
-        <label htmlFor="outdoor">Outdoor</label>
-        <input type="radio" name="ubication" value="both" />
-        <label htmlFor="both">Both</label>
+        <label>
+          Indoor
+          <input type="radio" name="ubication" value="indoor" />
+        </label>
+        <label>
+          Outdoor
+          <input type="radio" name="ubication" value="outdoor" />
+        </label>
+        <label>
+          Both
+          <input type="radio" name="ubication" value="both" />
+        </label>
         <label htmlFor="height">Height</label>
         <input
           type="number"
