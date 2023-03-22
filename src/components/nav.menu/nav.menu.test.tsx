@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
 import { MenuOption } from "../header/header";
-import { MenuProps, NavMenu } from "./nav.menu";
+import { NavMenu } from "./nav.menu";
 import { MemoryRouter as Router } from "react-router-dom";
 
 describe("Given the nav component", () => {
@@ -18,20 +18,16 @@ describe("Given the nav component", () => {
     },
   ];
 
-  const mockProp: MenuProps = {
-    options: mockOptions,
-  };
   describe("When it is render", () => {
     test("Then it should print an unorder list", () => {
       render(
-        <Provider store={store}>
-          <Router>
-            <NavMenu options={mockProp}></NavMenu>
-          </Router>
-        </Provider>
+        <Router>
+          <NavMenu options={mockOptions}></NavMenu>
+        </Router>
       );
-      const element = screen.getByDisplayValue(/test/i);
-      expect(element).toBeInTheDocument();
+
+      const element = screen.getAllByRole("listitem");
+      expect(element[0]).toBeInTheDocument();
     });
   });
 });
