@@ -3,6 +3,8 @@ import { reducer as userRed } from "../reducer/user.slice";
 import { reducer as errorRed } from "../reducer/error.slice";
 import { reducer as plantRed } from "../reducer/plant.slice";
 
+jest.mock("../components/nav.menu/nav.menu.tsx");
+
 export const store = configureStore({
   reducer: {
     users: userRed,
