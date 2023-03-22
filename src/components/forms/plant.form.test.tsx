@@ -67,8 +67,8 @@ describe("Given AddPlantForm component", () => {
       const textInputs = screen.getAllByRole("textbox");
       await userEvent.type(textInputs[0], "test");
       await userEvent.type(textInputs[1], "test");
-      const radioInputs = screen.getAllByRole("radio");
-      await userEvent.click(radioInputs[1]);
+      const radioInputs = screen.getByLabelText("Indoor");
+      await fireEvent.change(radioInputs, { target: { value: "outdoor" } });
       const numberInput = screen.getByRole("spinbutton");
       await userEvent.type(numberInput, "6");
       const sliderInputs = screen.getAllByRole("slider");
@@ -82,7 +82,7 @@ describe("Given AddPlantForm component", () => {
       expect(usePlants(plantsMockRepo).addPlant).toHaveBeenCalledWith({
         photo: "test",
         name: "test",
-        ubication: "indoor",
+        ubication: "outdoor",
         height: "6",
         humidity: "2",
         lightness: "2",
