@@ -13,8 +13,8 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
   let mockRepo: PlantsApiRepo;
 
   mockPayload = {
-    username: "test",
-    email: "test",
+    name: "test",
+    ubication: "test",
   } as unknown as Plant;
 
   mockRepo = {
@@ -53,6 +53,14 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
       const element = await screen.findByRole("button");
       await act(async () => userEvent.click(element));
       expect(mockRepo.addPlantRepo).toHaveBeenCalled();
+    });
+    test("If the repo throw an error, the setError should be called", async () => {
+      (mockRepo.addPlantRepo as jest.Mock).mockRejectedValue(new Error("test"));
+      const element = await screen.findByRole("button");
+      await act(async () => userEvent.click(element));
+      const result = store.getState().errors.message;
+      expect(element).toBeInTheDocument();
+      expect(result).toEqual("test");
     });
   });
 });
