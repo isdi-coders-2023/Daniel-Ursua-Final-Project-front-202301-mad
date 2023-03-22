@@ -6,6 +6,7 @@ export type MenuProps = {
 };
 
 export function NavMenu({ options }: MenuProps) {
+  console.log({ options });
   return (
     <nav>
       <ul>
