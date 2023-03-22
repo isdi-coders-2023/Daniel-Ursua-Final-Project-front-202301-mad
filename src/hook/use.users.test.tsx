@@ -17,7 +17,6 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
   //   ...jest.requireActual,
   //   dispatch: mockDispatch,
   // }));
-
   // jest.mock("react-redux", () => ({
   //   // ...jest.requireActual,
   //   useDispatch: mockDispatch,
