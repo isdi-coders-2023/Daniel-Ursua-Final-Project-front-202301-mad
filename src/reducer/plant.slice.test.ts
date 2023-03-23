@@ -1,24 +1,44 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { PlantList } from "../models/plant.model";
+import { Plant, PlantInTheList } from "../models/plant.model";
 import { reducer, State } from "./plant.slice";
 
-const mockPlants = ["Plant1", "Plant2"] as unknown as PlantList;
+const mockPlants = ["Plant1", "Plant2"] as unknown as PlantInTheList[];
+
+const mockPlant = { name: "test", ubication: "test" } as unknown as Plant;
 
 const mockInitialState: State = {
   plantList: [],
+  actualPlant: null,
 };
-const mockState: State = {
+
+const mockChanged: State = {
+  plantList: mockPlants,
+  actualPlant: null,
+};
+const mockChanged2: State = {
   plantList: [],
+  actualPlant: mockPlant,
 };
+
 describe("Given the plant slice", () => {
   describe("When we call the getPlants method", () => {
     test("Then it should change the state", () => {
-      const mockAction: PayloadAction<PlantList> = {
-        type: "plant/getPlants",
+      const mockAction: PayloadAction<PlantInTheList[]> = {
+        type: "plant/changePlantList",
         payload: mockPlants,
       };
       const element = reducer(mockInitialState, mockAction);
-      expect(element.plantList).toEqual(mockPlants);
+      expect(element).toEqual(mockChanged);
+    });
+  });
+  describe("When we call the changePlant method", () => {
+    test("Then it should change the state", () => {
+      const mockAction: PayloadAction<Plant> = {
+        type: "plant/changePlant",
+        payload: mockPlant,
+      };
+      const element = reducer(mockInitialState, mockAction);
+      expect(element).toEqual(mockChanged2);
     });
   });
 });
