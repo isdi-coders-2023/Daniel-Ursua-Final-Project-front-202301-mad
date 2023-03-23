@@ -1,4 +1,4 @@
-import { Plant, PlantList, ProtoPlant } from "../models/plant.model";
+import { Plant, PlantInTheList, ProtoPlant } from "../models/plant.model";
 import { PlantsApiRepo } from "./plants.api.repo";
 
 const mockResp = {
@@ -17,7 +17,7 @@ const mockPlants = [
     name: "test2",
   },
   { name: "test3" },
-] as PlantList[];
+] as PlantInTheList[];
 describe("Given the plants api repo", () => {
   const repo = new PlantsApiRepo();
 
@@ -41,25 +41,45 @@ describe("Given the plants api repo", () => {
       expect(result).toEqual(mockResp);
     });
   });
-});
 
-describe("Given the get plants in the repo", () => {
-  const repo = new PlantsApiRepo();
-  describe("And the resp is not ok", () => {
-    test("Then it should throw an http error", async () => {
-      (global.fetch as jest.Mock).mockResolvedValue("test");
-      const result = repo.getPlantsRepo();
-      await expect(result).rejects.toThrow();
+  describe("Given the get plants in the repo", () => {
+    const repo = new PlantsApiRepo();
+    describe("And the resp is not ok", () => {
+      test("Then it should throw an http error", async () => {
+        (global.fetch as jest.Mock).mockResolvedValue("test");
+        const result = repo.getPlantsRepo();
+        await expect(result).rejects.toThrow();
+      });
+    });
+    describe("And the resp is ok", () => {
+      test("Then it should return all the data", async () => {
+        (global.fetch as jest.Mock).mockResolvedValue({
+          ok: true,
+          json: jest.fn().mockResolvedValue(mockPlants),
+        });
+        const result = await repo.getPlantsRepo();
+        expect(result).toBe(mockPlants);
+      });
     });
   });
-  describe("And the resp is ok", () => {
-    test("Then it should return all the data", async () => {
-      (global.fetch as jest.Mock).mockResolvedValue({
-        ok: true,
-        json: jest.fn().mockResolvedValue(mockPlants),
+  describe("Given the get plants by Id in the repo", () => {
+    const repo = new PlantsApiRepo();
+    describe("And the resp is not ok", () => {
+      test("Then it should throw an http error", async () => {
+        (global.fetch as jest.Mock).mockResolvedValue("test");
+        const result = repo.getPlantById("test");
+        await expect(result).rejects.toThrow();
       });
-      const result = await repo.getPlantsRepo();
-      expect(result).toBe(mockPlants);
+    });
+    describe("And the resp is ok", () => {
+      test("Then it should return one register", async () => {
+        (global.fetch as jest.Mock).mockResolvedValue({
+          ok: true,
+          json: jest.fn().mockResolvedValue(mockResp),
+        });
+        const result = await repo.getPlantById("test");
+        expect(result).toBe(mockResp);
+      });
     });
   });
 });

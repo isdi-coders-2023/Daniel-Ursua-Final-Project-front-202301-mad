@@ -78,7 +78,7 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
       (mockRepo.addPlantRepo as jest.Mock).mockRejectedValue(new Error("test"));
     });
 
-    test.only("Add method should throw an error", async () => {
+    test("Add method should throw an error", async () => {
       const addButton = await screen.findByText(/add/i);
       await act(async () => userEvent.click(addButton));
       const result = store.getState().errors.message;
