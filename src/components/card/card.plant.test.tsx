@@ -14,7 +14,6 @@ const mockPlant: PlantInTheList = {
   name: "test name",
   id: "test id",
 };
-const mockUpdatePlant = jest.fn;
 beforeEach(() => {
   (usePlants as jest.Mock).mockReturnValue({ updatePlant: jest.fn() });
   render(<CardPlant info={mockPlant}></CardPlant>);
