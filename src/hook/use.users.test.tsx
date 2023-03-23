@@ -11,16 +11,6 @@ import { store } from "../app/store";
 describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent", () => {
   let mockPayload: User;
   let mockRepo: UsersApiRepo;
-  // Mock del dispatch
-  // let mockDispatch = jest.fn();
-  // jest.mock("../app/store", () => ({
-  //   ...jest.requireActual,
-  //   dispatch: mockDispatch,
-  // }));
-  // jest.mock("react-redux", () => ({
-  //   // ...jest.requireActual,
-  //   useDispatch: mockDispatch,
-  // }));
 
   mockPayload = {
     username: "test",
@@ -33,9 +23,6 @@ describe("Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
   } as unknown as UsersApiRepo;
 
   beforeEach(async () => {
-    //Mock del dispatch
-    //mockDispatch = jest.fn();
-
     const TestComponent = function () {
       const { register, loginUser } = useUsers(mockRepo);
 
