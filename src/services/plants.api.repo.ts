@@ -1,4 +1,4 @@
-import { Plant, ProtoPlant } from "../models/plant.model";
+import { Plant, PlantInTheList, ProtoPlant } from "../models/plant.model";
 
 export interface PlantRepoStructure {
   addPlantRepo(info: ProtoPlant): Promise<Plant>;
@@ -21,6 +21,20 @@ export class PlantsApiRepo {
       throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
     const data = (await resp.json()) as Plant;
 
+    return data;
+  }
+  async getPlantsRepo(): Promise<PlantInTheList[]> {
+    const resp = await fetch(this.url);
+    if (!resp.ok)
+      throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
+    const data = (await resp.json()) as PlantInTheList[];
+    return data;
+  }
+  async getPlantById(id: string): Promise<Plant> {
+    const resp = await fetch(this.url + id);
+    if (!resp.ok)
+      throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
+    const data = (await resp.json()) as Plant;
     return data;
   }
 }
