@@ -11,10 +11,11 @@ export type ProtoPlant = {
   petFriendly: boolean;
 };
 
-export type PlantList = {
+export type PlantInTheList = {
   photo: string;
   name: string;
   ubication: Ubication;
+  id: string;
 };
 export type hasId = {
   id: string;
