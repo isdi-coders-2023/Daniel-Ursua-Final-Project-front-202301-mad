@@ -1,23 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PlantList } from "../models/plant.model";
+import { Plant, PlantInTheList } from "../models/plant.model";
 
 export type State = {
-  PlantList: PlantList[];
+  plantList: PlantInTheList[];
+  actualPlant: Plant | null;
 };
 
 export const initialState: State = {
-  PlantList: [],
+  plantList: [],
+  actualPlant: null,
 };
 
 export const slice = createSlice({
   name: "plant",
   initialState,
   reducers: {
-    getPlants(state, action) {
-      state.PlantList = action.payload;
+    changePlantList(state, action) {
+      state.plantList = action.payload;
+    },
+    changePlant(state, action) {
+      state.actualPlant = action.payload;
     },
   },
 });
 
-export const { getPlants } = slice.actions;
+export const { changePlantList, changePlant } = slice.actions;
 export const { reducer } = slice;
