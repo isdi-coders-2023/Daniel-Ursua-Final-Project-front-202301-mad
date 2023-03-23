@@ -5,10 +5,10 @@ import { reducer, State } from "./plant.slice";
 const mockPlants = ["Plant1", "Plant2"] as unknown as PlantList;
 
 const mockInitialState: State = {
-  PlantList: [],
+  plantList: [],
 };
 const mockState: State = {
-  PlantList: [],
+  plantList: [],
 };
 describe("Given the plant slice", () => {
   describe("When we call the getPlants method", () => {
@@ -18,7 +18,7 @@ describe("Given the plant slice", () => {
         payload: mockPlants,
       };
       const element = reducer(mockInitialState, mockAction);
-      expect(element.PlantList).toEqual(mockPlants);
+      expect(element.plantList).toEqual(mockPlants);
     });
   });
 });
