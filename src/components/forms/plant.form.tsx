@@ -11,19 +11,20 @@ export function PlantForm() {
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const formAddPlant = ev.currentTarget;
+    const file = (formAddPlant[9] as HTMLInputElement).files?.item(0);
+    if (!file) return;
     const addInfo: ProtoPlant = {
-      photo: (formAddPlant.elements[0] as HTMLInputElement).value,
-      name: (formAddPlant.elements[1] as HTMLInputElement).value,
+      name: (formAddPlant.elements[0] as HTMLInputElement).value,
       ubication: (
         formAddPlant.elements.namedItem("ubication") as HTMLInputElement
       ).value as Ubication,
-      height: (formAddPlant.elements[5] as HTMLInputElement).value,
-      lightness: (formAddPlant.elements[6] as HTMLInputElement).value,
-      humidity: (formAddPlant.elements[7] as HTMLInputElement).value,
-      difficult: (formAddPlant.elements[8] as HTMLInputElement).value,
-      petFriendly: (formAddPlant.elements[9] as HTMLInputElement).checked,
+      height: (formAddPlant.elements[4] as HTMLInputElement).value,
+      lightness: (formAddPlant.elements[5] as HTMLInputElement).value,
+      humidity: (formAddPlant.elements[6] as HTMLInputElement).value,
+      difficult: (formAddPlant.elements[7] as HTMLInputElement).value,
+      petFriendly: (formAddPlant.elements[8] as HTMLInputElement).checked,
     };
-    addPlant(addInfo);
+    addPlant(addInfo, file);
 
     formAddPlant.reset();
   };
@@ -31,12 +32,6 @@ export function PlantForm() {
   return (
     <>
       <form className="login-form" data-testid="form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Photo"
-          className="login-form__field"
-          name="photo"
-        />
         <input
           type="text"
           placeholder="Name"
@@ -81,6 +76,12 @@ export function PlantForm() {
         <p>Expert</p>
         <input type="checkbox" name="petFriendly" />
         <label htmlFor="petFriendly">Pet friendly</label>
+        <input
+          type="text"
+          placeholder="Photo"
+          className="login-form__field"
+          name="photo"
+        />
         <button type="submit">Send</button>
       </form>
     </>
