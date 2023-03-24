@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from "react";
 import { usePlants } from "../../hook/use.plants";
-import { ProtoPlant, Ubication } from "../../models/plant.model";
+import { ProtoPlant, Location } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 
 export function PlantForm() {
@@ -11,13 +11,13 @@ export function PlantForm() {
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const formAddPlant = ev.currentTarget;
-    const file = (formAddPlant[9] as HTMLInputElement).files?.item(0);
+    const file = (formAddPlant.elements[9] as HTMLInputElement).files?.item(0);
     if (!file) return;
     const addInfo: ProtoPlant = {
       name: (formAddPlant.elements[0] as HTMLInputElement).value,
-      ubication: (
-        formAddPlant.elements.namedItem("ubication") as HTMLInputElement
-      ).value as Ubication,
+      location: (
+        formAddPlant.elements.namedItem("location") as HTMLInputElement
+      ).value as Location,
       height: (formAddPlant.elements[4] as HTMLInputElement).value,
       lightness: (formAddPlant.elements[5] as HTMLInputElement).value,
       humidity: (formAddPlant.elements[6] as HTMLInputElement).value,
@@ -41,15 +41,15 @@ export function PlantForm() {
         />
         <label>
           Indoor
-          <input type="radio" name="ubication" value="indoor" />
+          <input type="radio" name="location" value="indoor" />
         </label>
         <label>
           Outdoor
-          <input type="radio" name="ubication" value="outdoor" />
+          <input type="radio" name="location" value="outdoor" />
         </label>
         <label>
           Both
-          <input type="radio" name="ubication" value="both" />
+          <input type="radio" name="location" value="both" />
         </label>
         <label htmlFor="height">Height</label>
         <input
@@ -76,12 +76,16 @@ export function PlantForm() {
         <p>Expert</p>
         <input type="checkbox" name="petFriendly" />
         <label htmlFor="petFriendly">Pet friendly</label>
-        <input
-          type="text"
-          placeholder="Photo"
-          className="login-form__field"
-          name="photo"
-        />
+        <label>
+          Upload photo
+          <input
+            type="file"
+            placeholder="Photo"
+            className="login-form__field"
+            name="photo"
+            role="file"
+          />
+        </label>
         <button type="submit">Send</button>
       </form>
     </>

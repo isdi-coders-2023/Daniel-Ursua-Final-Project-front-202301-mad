@@ -26,9 +26,8 @@ describe("Given AddPlantForm component", () => {
 
   describe("When the component is rendered", () => {
     test("Then the text inputs should be in the document", () => {
-      const inputs = screen.getAllByRole("textbox");
-      expect(inputs[0]).toBeInTheDocument();
-      expect(inputs[1]).toBeInTheDocument();
+      const input = screen.getByRole("textbox");
+      expect(input).toBeInTheDocument();
     });
 
     test("Then the radio inputs should be in the document", () => {
@@ -64,9 +63,8 @@ describe("Given AddPlantForm component", () => {
   describe("When the submit button is clicked", () => {
     test("Then, the handleSubmit function should be called", async () => {
       const plantsMockRepo = {} as unknown as PlantsApiRepo;
-      const textInputs = screen.getAllByRole("textbox");
-      await userEvent.type(textInputs[0], "test");
-      await userEvent.type(textInputs[1], "test");
+      const textInput = screen.getByRole("textbox");
+      await userEvent.type(textInput, "test");
       const radioInputs = screen.getByLabelText("Indoor");
       await fireEvent.change(radioInputs, { target: { value: "outdoor" } });
       const numberInput = screen.getByRole("spinbutton");
@@ -77,18 +75,30 @@ describe("Given AddPlantForm component", () => {
       await fireEvent.change(sliderInputs[2], { target: { value: 2 } });
       const checkInput = screen.getByRole("checkbox");
       await userEvent.click(checkInput);
+      const fileInput = screen.getByRole("file");
+      userEvent.upload(
+        fileInput,
+        new File(["test"], "test.png", {
+          type: "image/png",
+        })
+      );
       const button = screen.getByRole("button");
       await userEvent.click(button);
-      expect(usePlants(plantsMockRepo).addPlant).toHaveBeenCalledWith({
-        photo: "test",
-        name: "test",
-        ubication: "outdoor",
-        height: "6",
-        humidity: "2",
-        lightness: "2",
-        difficult: "2",
-        petFriendly: true,
-      });
+      console.log(fileInput);
+      expect(usePlants(plantsMockRepo).addPlant).toHaveBeenCalledWith(
+        {
+          name: "test",
+          location: "outdoor",
+          height: "6",
+          humidity: "2",
+          lightness: "2",
+          difficult: "2",
+          petFriendly: true,
+        },
+        new File(["test"], "test.png", {
+          type: "image/png",
+        })
+      );
     });
   });
 });
