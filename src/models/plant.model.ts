@@ -1,7 +1,7 @@
 export type Ubication = "indoor" | "outdoor" | "both";
 
 export type ProtoPlant = {
-  photo: string;
+  photo?: string;
   name: string;
   ubication: Ubication;
   height: string;
