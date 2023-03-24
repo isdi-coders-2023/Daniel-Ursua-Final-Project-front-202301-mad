@@ -31,14 +31,8 @@ export function PlantForm() {
 
   return (
     <>
-      <form className="login-form" data-testid="form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          className="login-form__field"
-          name="password"
-          role="textbox"
-        />
+      <form data-testid="form" onSubmit={handleSubmit}>
+        <input type="text" placeholder="Name" name="password" role="textbox" />
         <label>
           Indoor
           <input type="radio" name="location" value="indoor" />
@@ -78,13 +72,7 @@ export function PlantForm() {
         <label htmlFor="petFriendly">Pet friendly</label>
         <label>
           Upload photo
-          <input
-            type="file"
-            placeholder="Photo"
-            className="login-form__field"
-            name="photo"
-            role="file"
-          />
+          <input type="file" placeholder="Photo" name="photo" role="file" />
         </label>
         <button type="submit">Send</button>
       </form>
