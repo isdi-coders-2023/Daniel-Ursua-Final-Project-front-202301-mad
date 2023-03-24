@@ -3,7 +3,7 @@ import { PlantsApiRepo } from "./plants.api.repo";
 
 const mockResp = {
   name: "test",
-  ubication: "test",
+  location: "test",
 } as unknown as Plant;
 const mockPlant = {
   name: "test",

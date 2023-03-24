@@ -43,7 +43,7 @@ export function usePlants(repo: PlantsApiRepo) {
   return {
     plants,
     addPlant,
-    getPlants: getPlants,
+    getPlants,
     updatePlant,
   };
 }

@@ -4,7 +4,7 @@ import { reducer, State } from "./plant.slice";
 
 const mockPlants = ["Plant1", "Plant2"] as unknown as PlantInTheList[];
 
-const mockPlant = { name: "test", ubication: "test" } as unknown as Plant;
+const mockPlant = { name: "test", location: "test" } as unknown as Plant;
 
 const mockInitialState: State = {
   plantList: [],

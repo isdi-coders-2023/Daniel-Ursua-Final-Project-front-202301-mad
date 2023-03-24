@@ -14,7 +14,7 @@ let mockRepo: PlantsApiRepo;
 
 mockPayload = {
   name: "test",
-  ubication: "test",
+  location: "test",
 } as unknown as ProtoPlant;
 
 mockRepo = {

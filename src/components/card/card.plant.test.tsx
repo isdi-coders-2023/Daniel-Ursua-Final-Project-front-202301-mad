@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-render-in-setup */
 import { fireEvent, render, screen } from "@testing-library/react";
 import { usePlants } from "../../hook/use.plants";
-import { PlantInTheList, Ubication } from "../../models/plant.model";
+import { PlantInTheList, Location } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 import CardPlant from "./card.plant";
 
@@ -10,7 +10,7 @@ jest.mock("../../hook/use.plants");
 
 const mockPlant: PlantInTheList = {
   photo: "test image",
-  ubication: "test ubication" as Ubication,
+  location: "test location" as Location,
   name: "test name",
   id: "test id",
 };
@@ -21,11 +21,11 @@ beforeEach(() => {
 
 describe("Given the card plant component", () => {
   describe("When it is render", () => {
-    test("Then it should print differents elements", async () => {
+    test("Then it should print different elements", async () => {
       const image = await screen.findByText(/image/i);
       expect(image).toBeInTheDocument();
-      const ubication = await screen.findByText(/ubication/i);
-      expect(ubication).toBeInTheDocument();
+      const location = await screen.findByText(/location/i);
+      expect(location).toBeInTheDocument();
       const name = await screen.findByText(/name/i);
       expect(name).toBeInTheDocument();
     });
