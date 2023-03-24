@@ -4,16 +4,18 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
-import { Plant } from "../models/plant.model";
+import { ProtoPlant } from "../models/plant.model";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { usePlants } from "./use.plants";
-let mockPayload: Plant;
+jest.mock("@firebase/storage");
+
+let mockPayload: ProtoPlant;
 let mockRepo: PlantsApiRepo;
 
 mockPayload = {
   name: "test",
   ubication: "test",
-} as unknown as Plant;
+} as unknown as ProtoPlant;
 
 mockRepo = {
   addPlantRepo: jest.fn(),
@@ -21,13 +23,15 @@ mockRepo = {
   getPlantById: jest.fn(),
 } as unknown as PlantsApiRepo;
 
+const mockFile = "test" as unknown as File;
+
 beforeEach(async () => {
   const TestComponent = function () {
     const { addPlant, getPlants, updatePlant } = usePlants(mockRepo);
 
     return (
       <>
-        <button onClick={() => addPlant(mockPayload)}>Add</button>
+        <button onClick={() => addPlant(mockPayload, mockFile)}>Add</button>
         <button onClick={() => getPlants()}>Get</button>
         <button onClick={() => updatePlant("test")}>Update</button>
       </>
@@ -54,7 +58,10 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
   describe("And the add button is clicked", () => {
     test("Then, the add functions should be called", async () => {
       const addButton = await screen.findByText(/add/i);
-      await act(async () => userEvent.click(addButton));
+      await act(async () => {
+        await userEvent.click(addButton);
+      });
+
       expect(mockRepo.addPlantRepo).toHaveBeenCalled();
     });
   });
@@ -76,10 +83,14 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
   describe("When the hooks methods in the repo throw errors", () => {
     beforeEach(() => {
       (mockRepo.addPlantRepo as jest.Mock).mockRejectedValue(new Error("test"));
+      (mockRepo.getPlantsRepo as jest.Mock).mockRejectedValue(
+        new Error("test")
+      );
+      (mockRepo.getPlantById as jest.Mock).mockRejectedValue(new Error("test"));
     });
 
     test("Add method should throw an error", async () => {
-      const addButton = await screen.findByText(/add/i);
+      const addButton = await screen.findByText(/Add/i);
       await act(async () => userEvent.click(addButton));
       const result = store.getState().errors.message;
       expect(result).toBe("test");

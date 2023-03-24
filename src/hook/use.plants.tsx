@@ -4,16 +4,23 @@ import { ProtoPlant } from "../models/plant.model";
 import { setError } from "../reducer/error.slice";
 import { changePlant, changePlantList } from "../reducer/plant.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
+import { storage } from "../services/firebase/firebase";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export function usePlants(repo: PlantsApiRepo) {
   const plants = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
-  const addPlant = async (info: ProtoPlant) => {
+  const addPlant = async (info: ProtoPlant, file: File) => {
     try {
+      const storageRef = ref(storage, info.name);
+      await uploadBytes(storageRef, file);
+      const imgURL = await getDownloadURL(storageRef);
+      info.photo = imgURL;
       await repo.addPlantRepo(info);
     } catch (error) {
       dispatch(setError((error as Error).message));
+      console.log((error as Error).message);
     }
   };
 
