@@ -6,7 +6,7 @@ const Login = lazy(() => import("../pages/login/login"));
 const Register = lazy(() => import("../pages/register/register"));
 const Add = lazy(() => import("../pages/add/add"));
 const PlantList = lazy(() => import("../pages/plantList/plantList"));
-//Future rout const Plants = lazy (() => import ('../pages/plants/editPlant'));
+const Edit = lazy(() => import("../pages/edit/edit"));
 //Future rout const Plants = lazy (() => import ('../pages/plants/detail'));
 
 export function AppRouter() {
@@ -18,6 +18,7 @@ export function AppRouter() {
         <Route path={"/register"} element={<Register></Register>}></Route>
         <Route path={"/add"} element={<Add></Add>}></Route>
         <Route path={"/plants"} element={<PlantList></PlantList>}></Route>
+        <Route path={"/edit"} element={<Edit></Edit>}></Route>
       </Routes>
     </Suspense>
   );
