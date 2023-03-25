@@ -23,8 +23,8 @@ export class PlantsApiRepo {
 
     return data;
   }
-  async getPlantsRepo(): Promise<PlantInTheList[]> {
-    const resp = await fetch(this.url);
+  async getPlantsRepo(page?: number): Promise<PlantInTheList[]> {
+    const resp = await fetch(`${this.url}?page=${page}`);
     if (!resp.ok)
       throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
     const data = (await resp.json()) as PlantInTheList[];
