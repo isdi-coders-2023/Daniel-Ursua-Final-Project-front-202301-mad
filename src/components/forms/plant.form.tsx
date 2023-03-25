@@ -5,6 +5,7 @@ import { ProtoPlant, Location } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 
 export function PlantForm() {
+  debugger;
   const repo = useMemo(() => new PlantsApiRepo(), []);
   const { addPlant, plants } = usePlants(repo);
   const actualPlant = plants.actualPlant;
@@ -20,8 +21,8 @@ export function PlantForm() {
         formAddPlant.elements.namedItem("location") as HTMLInputElement
       ).value as Location,
       height: (formAddPlant.elements[4] as HTMLInputElement).value,
-      lightness: (formAddPlant.elements[5] as HTMLInputElement).value,
-      humidity: (formAddPlant.elements[6] as HTMLInputElement).value,
+      humidity: (formAddPlant.elements[5] as HTMLInputElement).value,
+      lightness: (formAddPlant.elements[6] as HTMLInputElement).value,
       difficulty: (formAddPlant.elements[7] as HTMLInputElement).value,
       petFriendly: (formAddPlant.elements[8] as HTMLInputElement).checked,
     };
@@ -48,25 +49,33 @@ export function PlantForm() {
             name="location"
             value="indoor"
             required
-            checked={actualPlant ? actualPlant.location === "indoor" : false}
+            defaultChecked={
+              actualPlant ? actualPlant.location === "indoor" : false
+            }
           />
         </label>
         <label>
           Outdoor
           <input
+            id="outdoor"
             type="radio"
             name="location"
             value="outdoor"
-            checked={actualPlant ? actualPlant.location === "outdoor" : false}
+            defaultChecked={
+              actualPlant ? actualPlant.location === "outdoor" : false
+            }
           />
         </label>
         <label>
           Both
           <input
+            id="both"
             type="radio"
             name="location"
             value="both"
-            checked={actualPlant ? actualPlant.location === "both" : false}
+            defaultChecked={
+              actualPlant ? actualPlant.location === "both" : false
+            }
           />
         </label>
         <label htmlFor="height">Height</label>
@@ -92,12 +101,7 @@ export function PlantForm() {
         />
         <p>Dry</p>
         <p>Moist</p>
-        <label
-          htmlFor="lightness"
-          defaultValue={actualPlant ? actualPlant.lightness : 2}
-        >
-          Lightness
-        </label>
+        <label htmlFor="lightness">Lightness</label>
         <input
           type="range"
           name="lightness"
@@ -123,18 +127,12 @@ export function PlantForm() {
           type="checkbox"
           name="petFriendly"
           required
-          checked={actualPlant ? actualPlant.petFriendly : false}
+          defaultChecked={actualPlant ? actualPlant.petFriendly : false}
         />
         <label htmlFor="petFriendly">Pet friendly</label>
         <label>
           Upload photo
-          <input
-            type="file"
-            placeholder="Photo"
-            name="photo"
-            required
-            defaultValue={actualPlant ? actualPlant.photo : ""}
-          />
+          <input type="file" placeholder="Photo" name="photo" required />
         </label>
         <button type="submit">Send</button>
       </form>
