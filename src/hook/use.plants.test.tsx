@@ -4,63 +4,108 @@ import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
-import { Plant } from "../models/plant.model";
+import { ProtoPlant } from "../models/plant.model";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { usePlants } from "./use.plants";
+jest.mock("@firebase/storage");
+
+let mockPayload: ProtoPlant;
+let mockRepo: PlantsApiRepo;
+
+mockPayload = {
+  name: "test",
+  location: "test",
+} as unknown as ProtoPlant;
+
+mockRepo = {
+  addPlantRepo: jest.fn(),
+  getPlantsRepo: jest.fn(),
+  getPlantById: jest.fn(),
+} as unknown as PlantsApiRepo;
+
+const mockFile = "test" as unknown as File;
+
+beforeEach(async () => {
+  const TestComponent = function () {
+    const { addPlant, getPlants, updatePlant } = usePlants(mockRepo);
+
+    return (
+      <>
+        <button onClick={() => addPlant(mockPayload, mockFile)}>Add</button>
+        <button onClick={() => getPlants()}>Get</button>
+        <button onClick={() => updatePlant("test")}>Update</button>
+      </>
+    );
+  };
+
+  await act(async () =>
+    render(
+      <Provider store={store}>
+        <TestComponent></TestComponent>
+      </Provider>
+    )
+  );
+});
 
 describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestComponent", () => {
-  let mockPayload: Plant;
-  let mockRepo: PlantsApiRepo;
-
-  mockPayload = {
-    name: "test",
-    ubication: "test",
-  } as unknown as Plant;
-
-  mockRepo = {
-    addPlantRepo: jest.fn().mockRejectedValue("Error"),
-  } as unknown as PlantsApiRepo;
-
-  beforeEach(async () => {
-    const TestComponent = function () {
-      const { addPlant } = usePlants(mockRepo);
-
-      return (
-        <>
-          <button onClick={() => addPlant(mockPayload)}>Add</button>
-        </>
-      );
-    };
-
-    await act(async () =>
-      render(
-        <Provider store={store}>
-          <TestComponent></TestComponent>
-        </Provider>
-      )
-    );
-  });
-
-  describe("When the TestComponent is rendered", () => {
-    test("Then, the button should be in the document", async () => {
-      const element = await screen.findByRole("button");
-      expect(element).toBeInTheDocument();
+  describe("And the TestComponent is rendered", () => {
+    test("Then, three button should be in the document", async () => {
+      const elements = await screen.findAllByRole("button");
+      expect(elements.length).toBe(3);
     });
   });
 
-  describe("When the TestComponent is rendered and the add button is clicked", () => {
-    test("Then, the add plant function should be called", async () => {
-      const element = await screen.findByRole("button");
-      await act(async () => userEvent.click(element));
+  describe("And the add button is clicked", () => {
+    test("Then, the add functions should be called", async () => {
+      const addButton = await screen.findByText(/add/i);
+      await act(async () => {
+        await userEvent.click(addButton);
+      });
+
       expect(mockRepo.addPlantRepo).toHaveBeenCalled();
     });
-    test("If the repo throw an error, the setError should be called", async () => {
+  });
+  describe("And the get button is clicked", () => {
+    test("Then, the getPlants functions should be called", async () => {
+      const getButton = await screen.findByText(/get/i);
+      await act(async () => userEvent.click(getButton));
+      expect(mockRepo.getPlantsRepo).toHaveBeenCalled();
+    });
+  });
+  describe("And the update button is clicked", () => {
+    test("Then, the getById functions should be called", async () => {
+      const updateButton = await screen.findByText(/update/i);
+      await act(async () => userEvent.click(updateButton));
+      expect(mockRepo.getPlantById).toHaveBeenCalled();
+    });
+  });
+
+  describe("When the hooks methods in the repo throw errors", () => {
+    beforeEach(() => {
       (mockRepo.addPlantRepo as jest.Mock).mockRejectedValue(new Error("test"));
-      const element = await screen.findByRole("button");
-      await act(async () => userEvent.click(element));
+      (mockRepo.getPlantsRepo as jest.Mock).mockRejectedValue(
+        new Error("test")
+      );
+      (mockRepo.getPlantById as jest.Mock).mockRejectedValue(new Error("test"));
+    });
+
+    test("Add method should throw an error", async () => {
+      const addButton = await screen.findByText(/Add/i);
+      await act(async () => userEvent.click(addButton));
       const result = store.getState().errors.message;
-      expect(element).toBeInTheDocument();
-      expect(result).toEqual("test");
+      expect(result).toBe("test");
+    });
+    test("Get method should throw an error", async () => {
+      const getPlants = await screen.findByText(/get/i);
+      await act(async () => userEvent.click(getPlants));
+      const result = store.getState().errors.message;
+      expect(result).toBe("test");
+    });
+    test("Update method should throw an error", async () => {
+      const updateButton = await screen.findByText(/update/i);
+      await act(async () => userEvent.click(updateButton));
+      const result = store.getState().errors.message;
+      expect(result).toBe("test");
     });
   });
 });

@@ -1,9 +1,9 @@
-export type Ubication = "indoor" | "outdoor" | "both";
+export type Location = "indoor" | "outdoor" | "both";
 
 export type ProtoPlant = {
-  photo: string;
+  photo?: string;
   name: string;
-  ubication: Ubication;
+  location: Location;
   height: string;
   lightness: string;
   humidity: string;
@@ -11,10 +11,11 @@ export type ProtoPlant = {
   petFriendly: boolean;
 };
 
-export type PlantList = {
+export type PlantInTheList = {
   photo: string;
   name: string;
-  ubication: Ubication;
+  location: Location;
+  id: string;
 };
 export type hasId = {
   id: string;
