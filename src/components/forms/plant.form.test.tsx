@@ -31,9 +31,7 @@ describe("Given AddPlantForm component", () => {
 
     test("Then the radio inputs should be in the document", () => {
       const radioInputs = screen.getAllByRole("radio");
-      expect(radioInputs[0]).toBeInTheDocument();
-      expect(radioInputs[1]).toBeInTheDocument();
-      expect(radioInputs[2]).toBeInTheDocument();
+      expect(radioInputs.length).toBe(3);
     });
 
     test("Then the height input should be in the document", () => {
@@ -43,9 +41,7 @@ describe("Given AddPlantForm component", () => {
 
     test("Then the range input should be in the document", () => {
       const rangeInputs = screen.getAllByRole("slider");
-      expect(rangeInputs[0]).toBeInTheDocument();
-      expect(rangeInputs[1]).toBeInTheDocument();
-      expect(rangeInputs[2]).toBeInTheDocument();
+      expect(rangeInputs.length).toBe(3);
     });
 
     test("Then the petFriendly input should be in the document", () => {
