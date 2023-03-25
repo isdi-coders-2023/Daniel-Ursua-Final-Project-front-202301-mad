@@ -111,7 +111,7 @@ describe("Given AddPlantForm component", () => {
           height: "6",
           humidity: "2",
           lightness: "2",
-          difficult: "2",
+          difficulty: "2",
           petFriendly: true,
         },
         new File(["test"], "test.png", {
