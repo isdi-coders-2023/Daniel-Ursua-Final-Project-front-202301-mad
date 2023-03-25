@@ -79,13 +79,7 @@ export function PlantForm() {
         <label htmlFor="petFriendly">Pet friendly</label>
         <label>
           Upload photo
-          <input
-            type="file"
-            placeholder="Photo"
-            name="photo"
-            role="file"
-            required
-          />
+          <input type="file" placeholder="Photo" name="photo" required />
         </label>
         <button type="submit">Send</button>
       </form>
