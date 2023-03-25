@@ -10,6 +10,13 @@ import { PlantForm } from "./plant.form";
 
 jest.mock("../../hook/use.plants");
 
+let textInput: HTMLElement;
+let radioInputs: HTMLElement[];
+let heightInput: HTMLElement;
+let rangeInputs: HTMLElement[];
+let petInput: HTMLElement;
+let fileInput: HTMLElement;
+let button: HTMLElement;
 beforeEach(async () => {
   await act(async () => {
     (usePlants as jest.Mock).mockReturnValue({
@@ -21,59 +28,57 @@ beforeEach(async () => {
       </Provider>
     );
   });
+  textInput = screen.getByRole("textbox");
+  radioInputs = screen.getAllByRole("radio");
+  heightInput = screen.getByRole("spinbutton");
+  rangeInputs = screen.getAllByRole("slider");
+  petInput = screen.getByRole("checkbox");
+  fileInput = screen.getByPlaceholderText("Photo");
+  button = screen.getByRole("button");
 });
 describe("Given AddPlantForm component", () => {
   describe("When the component is rendered", () => {
     test("Then the text inputs should be in the document", () => {
-      const textInput = screen.getByRole("textbox");
       expect(textInput).toBeInTheDocument();
     });
 
     test("Then the radio inputs should be in the document", () => {
-      const radioInputs = screen.getAllByRole("radio");
       expect(radioInputs.length).toBe(3);
     });
 
     test("Then the height input should be in the document", () => {
-      const heightInput = screen.getByRole("spinbutton");
       expect(heightInput).toBeInTheDocument();
     });
 
     test("Then the range input should be in the document", () => {
-      const rangeInputs = screen.getAllByRole("slider");
       expect(rangeInputs.length).toBe(3);
     });
 
     test("Then the petFriendly input should be in the document", () => {
-      const petInput = screen.getByRole("checkbox");
       expect(petInput).toBeInTheDocument();
+    });
+    test("Then the image input should be in the document", () => {
+      expect(fileInput).toBeInTheDocument();
     });
 
     test("Then the <button> should be in the document", () => {
-      const button = screen.getByRole("button");
       expect(button).toBeInTheDocument();
     });
   });
-});
-describe("Given AddplantForm component", () => {
   describe("When there is no file to upload", () => {
     test("Then, the handleSubmit function should not be called", async () => {
       const plantsMockRepo = {} as unknown as PlantsApiRepo;
-      const textInput = screen.getByRole("textbox");
       await userEvent.type(textInput, "test");
-      const radioInputs = screen.getByLabelText("Indoor");
-      await fireEvent.change(radioInputs, { target: { value: "outdoor" } });
-      const numberInput = screen.getByRole("spinbutton");
-      await userEvent.type(numberInput, "6");
-      const sliderInputs = screen.getAllByRole("slider");
-      await fireEvent.change(sliderInputs[0], { target: { value: 2 } });
-      await fireEvent.change(sliderInputs[1], { target: { value: 2 } });
-      await fireEvent.change(sliderInputs[2], { target: { value: 2 } });
-      const checkInput = screen.getByRole("checkbox");
-      await userEvent.click(checkInput);
-      const fileInput = screen.getByPlaceholderText("Photo");
+      let radioInputs = screen.getByLabelText("Indoor");
+      await fireEvent.change(radioInputs, {
+        target: { value: "outdoor" },
+      });
+      await userEvent.type(heightInput, "6");
+      await fireEvent.change(rangeInputs[0], { target: { value: 1 } });
+      await fireEvent.change(rangeInputs[1], { target: { value: 4 } });
+      await fireEvent.change(rangeInputs[2], { target: { value: 3 } });
+      await userEvent.click(petInput);
       userEvent.type(fileInput, "test");
-      const button = screen.getByRole("button");
       await userEvent.click(button);
       expect(usePlants(plantsMockRepo).addPlant).not.toHaveBeenCalled();
     });
@@ -81,16 +86,13 @@ describe("Given AddplantForm component", () => {
   describe("When all the fields are complete", () => {
     test("Then, the handleSubmit function should be called", async () => {
       const plantsMockRepo = {} as unknown as PlantsApiRepo;
-      const textInput = screen.getByRole("textbox");
+      let radioInputs = screen.getByLabelText("Indoor");
       await userEvent.type(textInput, "test");
-      const radioInputs = screen.getByLabelText("Indoor");
       await fireEvent.change(radioInputs, { target: { value: "outdoor" } });
-      const numberInput = screen.getByRole("spinbutton");
-      await userEvent.type(numberInput, "6");
-      const sliderInputs = screen.getAllByRole("slider");
-      await fireEvent.change(sliderInputs[0], { target: { value: 2 } });
-      await fireEvent.change(sliderInputs[1], { target: { value: 2 } });
-      await fireEvent.change(sliderInputs[2], { target: { value: 2 } });
+      await userEvent.type(heightInput, "6");
+      await fireEvent.change(rangeInputs[0], { target: { value: 2 } });
+      await fireEvent.change(rangeInputs[1], { target: { value: 2 } });
+      await fireEvent.change(rangeInputs[2], { target: { value: 2 } });
       const checkInput = screen.getByRole("checkbox");
       await userEvent.click(checkInput);
       const fileInput = screen.getByPlaceholderText("Photo");
