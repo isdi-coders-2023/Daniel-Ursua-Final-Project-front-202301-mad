@@ -7,7 +7,7 @@ export type ProtoPlant = {
   height: string;
   lightness: string;
   humidity: string;
-  difficult: string;
+  difficulty: string;
   petFriendly: boolean;
 };
 

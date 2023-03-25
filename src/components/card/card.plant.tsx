@@ -23,11 +23,3 @@ export default function CardPlant({ info }: CardProps) {
     </div>
   );
 }
-
-//Código para aprovecharlo en la tarjeta detalle
-// const repo = useMemo (() => new UsersApiRepo(), [])
-// const { users } = useUsers(repo)
-// const actualUser = users.users.userLogged?
-// const handleClickMyPlants = (ev: SyntheticEvent) => {
-//   actualUser.plantList.push()
-// };

@@ -8,7 +8,7 @@ import { storage } from "../services/firebase/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 export function usePlants(repo: PlantsApiRepo) {
-  const plants = useSelector((state: RootState) => state);
+  const plants = useSelector((state: RootState) => state.plants);
   const dispatch = useDispatch<AppDispatch>();
 
   const addPlant = async (info: ProtoPlant, file: File) => {
