@@ -150,9 +150,7 @@ describe("When the form is called from edit", () => {
         </Provider>
       );
     });
-    let radioInputs: HTMLInputElement;
     textInput = screen.getByRole("textbox");
-    radioInputs = screen.getByLabelText("Indoor");
     heightInput = screen.getByRole("spinbutton");
     rangeInputs = screen.getAllByRole("slider");
     petInput = screen.getByRole("checkbox");
