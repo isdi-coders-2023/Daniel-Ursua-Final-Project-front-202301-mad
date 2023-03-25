@@ -21,6 +21,9 @@ beforeEach(async () => {
   await act(async () => {
     (usePlants as jest.Mock).mockReturnValue({
       addPlant: jest.fn(),
+      plants: {
+        actualPlant: {},
+      },
     });
     render(
       <Provider store={store}>
