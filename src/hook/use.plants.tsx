@@ -10,9 +10,12 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 export function usePlants(repo: PlantsApiRepo) {
   const plants = useSelector((state: RootState) => state.plants);
   const dispatch = useDispatch<AppDispatch>();
+  const users = useSelector((state: RootState) => state.users);
 
   const addPlant = async (info: ProtoPlant, file: File) => {
     try {
+      const userLog = users.userLogged?.token;
+      if (!userLog) throw new Error("You must to be logged");
       const storageRef = ref(storage, info.name);
       await uploadBytes(storageRef, file);
       const imgURL = await getDownloadURL(storageRef);
@@ -20,20 +23,25 @@ export function usePlants(repo: PlantsApiRepo) {
       await repo.addPlantRepo(info);
     } catch (error) {
       dispatch(setError((error as Error).message));
-      console.log((error as Error).message);
     }
   };
 
   const getPlants = async () => {
     try {
-      const result = await repo.getPlantsRepo();
-      dispatch(changePlantList(result));
+      const userLog = users.userLogged?.token;
+      if (!userLog) throw new Error("You must to be logged");
+      const actualPlants = plants.plantList;
+      const actualPage = actualPlants.length / 5;
+      const result = await repo.getPlantsRepo(actualPage + 1);
+      dispatch(changePlantList([...actualPlants, ...result]));
     } catch (error) {
       dispatch(setError((error as Error).message));
     }
   };
   const updatePlant = async (id: string) => {
     try {
+      const userLog = users.userLogged?.token;
+      if (!userLog) throw new Error("You must to be logged");
       const result = await repo.getPlantById(id);
       dispatch(changePlant(result));
     } catch (error) {
