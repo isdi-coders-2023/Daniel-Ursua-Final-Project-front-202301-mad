@@ -25,37 +25,37 @@ beforeEach(async () => {
 describe("Given AddPlantForm component", () => {
   describe("When the component is rendered", () => {
     test("Then the text inputs should be in the document", () => {
-      const input = screen.getByRole("textbox");
-      expect(input).toBeInTheDocument();
+      const textInput = screen.getByRole("textbox");
+      expect(textInput).toBeInTheDocument();
     });
 
     test("Then the radio inputs should be in the document", () => {
-      const inputs = screen.getAllByRole("radio");
-      expect(inputs[0]).toBeInTheDocument();
-      expect(inputs[1]).toBeInTheDocument();
-      expect(inputs[2]).toBeInTheDocument();
+      const radioInputs = screen.getAllByRole("radio");
+      expect(radioInputs[0]).toBeInTheDocument();
+      expect(radioInputs[1]).toBeInTheDocument();
+      expect(radioInputs[2]).toBeInTheDocument();
     });
 
     test("Then the height input should be in the document", () => {
-      const input = screen.getByRole("spinbutton");
-      expect(input).toBeInTheDocument();
+      const heightInput = screen.getByRole("spinbutton");
+      expect(heightInput).toBeInTheDocument();
     });
 
     test("Then the range input should be in the document", () => {
-      const inputs = screen.getAllByRole("slider");
-      expect(inputs[0]).toBeInTheDocument();
-      expect(inputs[1]).toBeInTheDocument();
-      expect(inputs[2]).toBeInTheDocument();
+      const rangeInputs = screen.getAllByRole("slider");
+      expect(rangeInputs[0]).toBeInTheDocument();
+      expect(rangeInputs[1]).toBeInTheDocument();
+      expect(rangeInputs[2]).toBeInTheDocument();
     });
 
     test("Then the petFriendly input should be in the document", () => {
-      const input = screen.getByRole("checkbox");
-      expect(input).toBeInTheDocument();
+      const petInput = screen.getByRole("checkbox");
+      expect(petInput).toBeInTheDocument();
     });
 
     test("Then the <button> should be in the document", () => {
-      const input = screen.getByRole("button");
-      expect(input).toBeInTheDocument();
+      const button = screen.getByRole("button");
+      expect(button).toBeInTheDocument();
     });
   });
 });
