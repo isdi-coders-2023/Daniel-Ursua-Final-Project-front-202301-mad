@@ -133,7 +133,7 @@ export function PlantForm() {
             placeholder="Photo"
             name="photo"
             required
-            defaultValue={actualPlant ? actualPlant.photo : false}
+            defaultValue={actualPlant ? actualPlant.photo : ""}
           />
         </label>
         <button type="submit">Send</button>
