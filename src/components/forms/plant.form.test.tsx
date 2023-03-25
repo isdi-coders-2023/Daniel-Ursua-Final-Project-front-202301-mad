@@ -10,20 +10,19 @@ import { PlantForm } from "./plant.form";
 
 jest.mock("../../hook/use.plants");
 
-describe("Given AddPlantForm component", () => {
-  beforeEach(async () => {
-    await act(async () => {
-      (usePlants as jest.Mock).mockReturnValue({
-        addPlant: jest.fn(),
-      });
-      render(
-        <Provider store={store}>
-          <PlantForm></PlantForm>
-        </Provider>
-      );
+beforeEach(async () => {
+  await act(async () => {
+    (usePlants as jest.Mock).mockReturnValue({
+      addPlant: jest.fn(),
     });
+    render(
+      <Provider store={store}>
+        <PlantForm></PlantForm>
+      </Provider>
+    );
   });
-
+});
+describe("Given AddPlantForm component", () => {
   describe("When the component is rendered", () => {
     test("Then the text inputs should be in the document", () => {
       const input = screen.getByRole("textbox");
@@ -59,8 +58,31 @@ describe("Given AddPlantForm component", () => {
       expect(input).toBeInTheDocument();
     });
   });
-
-  describe("When the submit button is clicked", () => {
+});
+describe("Given AddplantForm component", () => {
+  describe("When there is no file to upload", () => {
+    test("Then, the handleSubmit function should not be called", async () => {
+      const plantsMockRepo = {} as unknown as PlantsApiRepo;
+      const textInput = screen.getByRole("textbox");
+      await userEvent.type(textInput, "test");
+      const radioInputs = screen.getByLabelText("Indoor");
+      await fireEvent.change(radioInputs, { target: { value: "outdoor" } });
+      const numberInput = screen.getByRole("spinbutton");
+      await userEvent.type(numberInput, "6");
+      const sliderInputs = screen.getAllByRole("slider");
+      await fireEvent.change(sliderInputs[0], { target: { value: 2 } });
+      await fireEvent.change(sliderInputs[1], { target: { value: 2 } });
+      await fireEvent.change(sliderInputs[2], { target: { value: 2 } });
+      const checkInput = screen.getByRole("checkbox");
+      await userEvent.click(checkInput);
+      const fileInput = screen.getByPlaceholderText("Photo");
+      userEvent.type(fileInput, "test");
+      const button = screen.getByRole("button");
+      await userEvent.click(button);
+      expect(usePlants(plantsMockRepo).addPlant).not.toHaveBeenCalled();
+    });
+  });
+  describe("When all the fields are complete", () => {
     test("Then, the handleSubmit function should be called", async () => {
       const plantsMockRepo = {} as unknown as PlantsApiRepo;
       const textInput = screen.getByRole("textbox");
@@ -75,7 +97,7 @@ describe("Given AddPlantForm component", () => {
       await fireEvent.change(sliderInputs[2], { target: { value: 2 } });
       const checkInput = screen.getByRole("checkbox");
       await userEvent.click(checkInput);
-      const fileInput = screen.getByRole("file");
+      const fileInput = screen.getByPlaceholderText("Photo");
       userEvent.upload(
         fileInput,
         new File(["test"], "test.png", {
@@ -84,7 +106,6 @@ describe("Given AddPlantForm component", () => {
       );
       const button = screen.getByRole("button");
       await userEvent.click(button);
-      console.log(fileInput);
       expect(usePlants(plantsMockRepo).addPlant).toHaveBeenCalledWith(
         {
           name: "test",

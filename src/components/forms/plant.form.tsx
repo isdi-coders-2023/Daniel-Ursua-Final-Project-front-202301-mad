@@ -32,10 +32,16 @@ export function PlantForm() {
   return (
     <>
       <form data-testid="form" onSubmit={handleSubmit}>
-        <input type="text" placeholder="Name" name="password" role="textbox" />
+        <input
+          type="text"
+          placeholder="Name"
+          name="password"
+          role="textbox"
+          required
+        />
         <label>
           Indoor
-          <input type="radio" name="location" value="indoor" />
+          <input type="radio" name="location" value="indoor" required />
         </label>
         <label>
           Outdoor
@@ -53,26 +59,33 @@ export function PlantForm() {
           max="200"
           step="1"
           placeholder="5"
+          required
         />
         <span>cms.</span>
 
         <label htmlFor="humadity">Humadity</label>
-        <input type="range" name="humadity" min="1" max="3" step="1" />
+        <input type="range" name="humadity" min="1" max="4" step="2" />
         <p>Dry</p>
         <p>Moist</p>
         <label htmlFor="lightness">Lightness</label>
-        <input type="range" name="lightness" min="1" max="3" step="1" />
+        <input type="range" name="lightness" min="1" max="4" step="2" />
         <p>Shade</p>
         <p>Sunny</p>
         <label htmlFor="difficult">Difficult</label>
-        <input type="range" name="difficult" min="1" max="3" step="1" />
+        <input type="range" name="difficult" min="1" max="4" step="2" />
         <p>Beginner</p>
         <p>Expert</p>
-        <input type="checkbox" name="petFriendly" />
+        <input type="checkbox" name="petFriendly" required />
         <label htmlFor="petFriendly">Pet friendly</label>
         <label>
           Upload photo
-          <input type="file" placeholder="Photo" name="photo" role="file" />
+          <input
+            type="file"
+            placeholder="Photo"
+            name="photo"
+            role="file"
+            required
+          />
         </label>
         <button type="submit">Send</button>
       </form>
