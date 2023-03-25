@@ -5,7 +5,6 @@ import { ProtoPlant, Location } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 
 export function PlantForm() {
-  debugger;
   const repo = useMemo(() => new PlantsApiRepo(), []);
   const { addPlant, plants } = usePlants(repo);
   const actualPlant = plants.actualPlant;
