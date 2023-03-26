@@ -21,3 +21,7 @@ export type hasId = {
   id: string;
 };
 export type Plant = hasId & ProtoPlant;
+
+export type PlantBackResponse = {
+  results: PlantInTheList[];
+};
