@@ -6,6 +6,7 @@ import { changePlant, changePlantList } from "../reducer/plant.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { storage } from "../services/firebase/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useCallback } from "react";
 
 export function usePlants(repo: PlantsApiRepo) {
   const plants = useSelector((state: RootState) => state.plants);
@@ -26,20 +27,19 @@ export function usePlants(repo: PlantsApiRepo) {
     }
   };
 
-  const getPlants = async () => {
-    debugger;
+  const getPlants = useCallback(async () => {
     try {
       const token = users.userLogged?.token;
       if (!token) throw new Error("You must to be logged");
       const actualPlants = plants.plantList;
       const actualPage = Math.ceil(actualPlants.length / 5);
       const result = await repo.getPlantsRepo(token, actualPage + 1);
-      console.log(token, actualPage, actualPlants.length);
-      dispatch(changePlantList([...actualPlants, ...result]));
+      dispatch(changePlantList(result));
     } catch (error) {
       dispatch(setError((error as Error).message));
     }
-  };
+  }, [dispatch, repo, users.userLogged?.token]);
+
   const updatePlant = async (id: string) => {
     try {
       const token = users.userLogged?.token;
