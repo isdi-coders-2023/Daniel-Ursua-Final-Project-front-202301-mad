@@ -95,7 +95,7 @@ export function PlantForm() {
           name="humidity"
           min="1"
           max="4"
-          step="2"
+          step="1"
           defaultValue={actualPlant ? actualPlant.humidity : 2}
         />
         <p>Dry</p>
@@ -106,7 +106,7 @@ export function PlantForm() {
           name="lightness"
           min="1"
           max="4"
-          step="2"
+          step="1"
           defaultValue={actualPlant ? actualPlant.lightness : 2}
         />
         <p>Shade</p>
@@ -117,7 +117,7 @@ export function PlantForm() {
           name="difficulty"
           min="1"
           max="4"
-          step="2"
+          step="1"
           defaultValue={actualPlant ? actualPlant.difficulty : 2}
         />
         <p>Beginner</p>
@@ -125,7 +125,6 @@ export function PlantForm() {
         <input
           type="checkbox"
           name="petFriendly"
-          required
           defaultChecked={actualPlant ? actualPlant.petFriendly : false}
         />
         <label htmlFor="petFriendly">Pet friendly</label>
