@@ -14,25 +14,27 @@ export function usePlants(repo: PlantsApiRepo) {
 
   const addPlant = async (info: ProtoPlant, file: File) => {
     try {
-      const userLog = users.userLogged?.token;
-      if (!userLog) throw new Error("You must to be logged");
+      const token = users.userLogged?.token;
+      if (!token) throw new Error("You must to be logged");
       const storageRef = ref(storage, info.name);
       await uploadBytes(storageRef, file);
       const imgURL = await getDownloadURL(storageRef);
       info.photo = imgURL;
-      await repo.addPlantRepo(info);
+      await repo.addPlantRepo(info, token);
     } catch (error) {
       dispatch(setError((error as Error).message));
     }
   };
 
   const getPlants = async () => {
+    debugger;
     try {
-      const userLog = users.userLogged?.token;
-      if (!userLog) throw new Error("You must to be logged");
+      const token = users.userLogged?.token;
+      if (!token) throw new Error("You must to be logged");
       const actualPlants = plants.plantList;
-      const actualPage = actualPlants.length / 5;
-      const result = await repo.getPlantsRepo(actualPage + 1);
+      const actualPage = Math.ceil(actualPlants.length / 5);
+      const result = await repo.getPlantsRepo(token, actualPage + 1);
+      console.log(token, actualPage, actualPlants.length);
       dispatch(changePlantList([...actualPlants, ...result]));
     } catch (error) {
       dispatch(setError((error as Error).message));
@@ -40,9 +42,9 @@ export function usePlants(repo: PlantsApiRepo) {
   };
   const updatePlant = async (id: string) => {
     try {
-      const userLog = users.userLogged?.token;
-      if (!userLog) throw new Error("You must to be logged");
-      const result = await repo.getPlantById(id);
+      const token = users.userLogged?.token;
+      if (!token) throw new Error("You must to be logged");
+      const result = await repo.getPlantById(id, token);
       dispatch(changePlant(result));
     } catch (error) {
       dispatch(setError((error as Error).message));

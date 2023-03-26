@@ -6,12 +6,12 @@ import { login } from "../reducer/user.slice";
 import { UsersApiRepo } from "../services/users.api.repo";
 
 export function useUsers(repo: UsersApiRepo) {
-  const users = useSelector((state: RootState) => state);
+  const users = useSelector((state: RootState) => state.users);
   const dispatch = useDispatch<AppDispatch>();
   const loginUser = async (info: Partial<User>) => {
     try {
       const data = await repo.loginUserRepo(info);
-      dispatch(login(data));
+      dispatch(login(data.results[0]));
     } catch (error) {
       dispatch(setError((error as Error).message));
     }
