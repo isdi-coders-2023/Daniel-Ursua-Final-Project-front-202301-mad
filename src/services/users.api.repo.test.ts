@@ -1,11 +1,17 @@
-import { protoUser } from "../models/user.model";
-import { LoginData } from "../reducer/user.slice";
+import { protoUser, User, UserBackResponse } from "../models/user.model";
 import { UsersApiRepo } from "./users.api.repo";
 
 const mockResp = {
-  token: "test",
-  user: "test",
-} as unknown as LoginData;
+  results: [
+    {
+      token: "test",
+      user: {
+        name: "test",
+      } as User,
+    },
+  ],
+} as unknown as UserBackResponse;
+
 const mockUser = {
   name: "test",
 } as protoUser;
