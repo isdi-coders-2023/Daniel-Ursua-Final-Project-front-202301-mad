@@ -5,11 +5,12 @@ import { PlantInTheList } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 
 export default function PlantList() {
+  debugger;
   const repo = useMemo(() => new PlantsApiRepo(), []);
   const { getPlants, plants } = usePlants(repo);
   useEffect(() => {
     getPlants();
-  }, [getPlants]);
+  });
 
   const plantsArray = plants.plantList;
   return (

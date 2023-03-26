@@ -1,9 +1,8 @@
-import { User } from "../models/user.model";
-import { LoginData } from "../reducer/user.slice";
+import { User, UserBackResponse } from "../models/user.model";
 
 export interface UserRepoStructure {
   registerUserRepo(user: Partial<User>): Promise<User>;
-  loginUser(user: Partial<User>): Promise<LoginData>;
+  loginUser(user: Partial<User>): Promise<UserBackResponse>;
 }
 
 export class UsersApiRepo {
@@ -25,7 +24,7 @@ export class UsersApiRepo {
 
     return data;
   }
-  async loginUserRepo(user: Partial<User>): Promise<LoginData> {
+  async loginUserRepo(user: Partial<User>): Promise<UserBackResponse> {
     const resp = await fetch(this.url + "login", {
       method: "POST",
       body: JSON.stringify(user),
@@ -35,7 +34,7 @@ export class UsersApiRepo {
     });
     if (!resp.ok)
       throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
-    const data = (await resp.json()) as LoginData;
+    const data = (await resp.json()) as UserBackResponse;
 
     return data;
   }
