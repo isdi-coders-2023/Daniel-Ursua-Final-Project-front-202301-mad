@@ -1,3 +1,4 @@
+import { LoginData } from "../reducer/user.slice";
 import { Plant } from "./plant.model";
 
 export type hasId = {
@@ -12,3 +13,7 @@ export type protoUser = {
 };
 
 export type User = hasId & protoUser;
+
+export type UserBackResponse = {
+  results: LoginData[];
+};
