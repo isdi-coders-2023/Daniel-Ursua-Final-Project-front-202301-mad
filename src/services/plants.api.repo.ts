@@ -1,4 +1,9 @@
-import { Plant, PlantInTheList, ProtoPlant } from "../models/plant.model";
+import {
+  Plant,
+  PlantBackResponse,
+  PlantInTheList,
+  ProtoPlant,
+} from "../models/plant.model";
 
 export interface PlantRepoStructure {
   addPlantRepo(info: ProtoPlant): Promise<Plant>;
@@ -33,7 +38,7 @@ export class PlantsApiRepo {
     });
     if (!resp.ok)
       throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
-    const data = await resp.json();
+    const data: PlantBackResponse = await resp.json();
     return data.results;
   }
   async getPlantById(id: string, token: string): Promise<Plant> {
