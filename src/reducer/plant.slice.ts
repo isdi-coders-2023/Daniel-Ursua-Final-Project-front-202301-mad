@@ -16,7 +16,7 @@ export const slice = createSlice({
   initialState,
   reducers: {
     changePlantList(state, action) {
-      state.plantList = action.payload;
+      state.plantList = [...state.plantList, ...action.payload];
     },
     changePlant(state, action) {
       state.actualPlant = action.payload;
