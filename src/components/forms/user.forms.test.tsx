@@ -7,6 +7,7 @@ import { store } from "../../app/store";
 import { useUsers } from "../../hook/use.users";
 import { UsersApiRepo } from "../../services/users.api.repo";
 import { LogUserForm } from "./user.forms";
+import { MemoryRouter as Router } from "react-router-dom";
 
 jest.mock("../../hook/use.users");
 
@@ -18,7 +19,9 @@ describe("Given LogUserForm component", () => {
       });
       render(
         <Provider store={store}>
-          <LogUserForm></LogUserForm>
+          <Router>
+            <LogUserForm></LogUserForm>
+          </Router>
         </Provider>
       );
     });

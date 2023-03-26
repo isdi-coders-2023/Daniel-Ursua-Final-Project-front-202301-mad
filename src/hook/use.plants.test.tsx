@@ -5,9 +5,13 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 import { ProtoPlant } from "../models/plant.model";
+import { State } from "../reducer/plant.slice";
+import { LoginData } from "../reducer/user.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { usePlants } from "./use.plants";
+import { useUsers } from "./use.users";
 jest.mock("@firebase/storage");
+jest.mock("../hook/use.users.tsx");
 
 let mockPayload: ProtoPlant;
 let mockRepo: PlantsApiRepo;
@@ -24,27 +28,33 @@ mockRepo = {
 } as unknown as PlantsApiRepo;
 
 const mockFile = "test" as unknown as File;
-
+const mockStore = {
+  users: {
+    userLogged: {
+      token: "test",
+    } as unknown as LoginData,
+  } as unknown as State,
+};
 beforeEach(async () => {
-  const TestComponent = function () {
-    const { addPlant, getPlants, updatePlant } = usePlants(mockRepo);
+  await act(async () => {
+    const TestComponent = function () {
+      const { addPlant, getPlants, updatePlant } = usePlants(mockRepo);
 
-    return (
-      <>
-        <button onClick={() => addPlant(mockPayload, mockFile)}>Add</button>
-        <button onClick={() => getPlants()}>Get</button>
-        <button onClick={() => updatePlant("test")}>Update</button>
-      </>
-    );
-  };
+      return (
+        <>
+          <button onClick={() => addPlant(mockPayload, mockFile)}>Add</button>
+          <button onClick={() => getPlants()}>Get</button>
+          <button onClick={() => updatePlant("test")}>Update</button>
+        </>
+      );
+    };
 
-  await act(async () =>
     render(
-      <Provider store={store}>
+      <Provider store={mockStore}>
         <TestComponent></TestComponent>
       </Provider>
-    )
-  );
+    );
+  });
 });
 
 describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestComponent", () => {
@@ -59,11 +69,10 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
     test("Then, the add functions should be called", async () => {
       const addButton = await screen.findByText(/add/i);
       await act(async () => {
-        await userEvent.click(addButton);
+        userEvent.click(addButton);
       });
-
-      expect(mockRepo.addPlantRepo).toHaveBeenCalled();
     });
+    expect(mockRepo.addPlantRepo).toHaveBeenCalled();
   });
   describe("And the get button is clicked", () => {
     test("Then, the getPlants functions should be called", async () => {

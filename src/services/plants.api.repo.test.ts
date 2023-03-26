@@ -1,4 +1,9 @@
-import { Plant, PlantInTheList, ProtoPlant } from "../models/plant.model";
+import {
+  Plant,
+  PlantBackResponse,
+  PlantInTheList,
+  ProtoPlant,
+} from "../models/plant.model";
 import { PlantsApiRepo } from "./plants.api.repo";
 
 const mockResp = {
@@ -9,15 +14,17 @@ const mockPlant = {
   name: "test",
 } as ProtoPlant;
 const mockToken = "test";
-const mockPlants = [
-  {
-    name: "test",
-  },
-  {
-    name: "test2",
-  },
-  { name: "test3" },
-] as PlantInTheList[];
+const mockPlants = {
+  results: [
+    {
+      name: "test",
+    },
+    {
+      name: "test2",
+    },
+    { name: "test3" },
+  ] as PlantInTheList[],
+} as PlantBackResponse;
 describe("Given the plants api repo", () => {
   const repo = new PlantsApiRepo();
 
@@ -58,7 +65,7 @@ describe("Given the plants api repo", () => {
           json: jest.fn().mockResolvedValue(mockPlants),
         });
         const result = await repo.getPlantsRepo(mockToken);
-        expect(result).toBe(mockPlants);
+        expect(result).toBe(mockPlants.results);
       });
     });
   });

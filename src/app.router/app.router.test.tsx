@@ -50,8 +50,8 @@ describe("Given the app router component", () => {
   describe('When it is render and the path is "/plants"', () => {
     test("Then, the title of plants should be in the document", async () => {
       await waitFor(async () => prepareTestFunction(4));
-      const element = await screen.findByRole("heading");
-      expect(element).toBeInTheDocument();
+      const elements = await screen.findAllByRole("heading");
+      expect(elements.length).toBe(2);
     });
   });
 });
