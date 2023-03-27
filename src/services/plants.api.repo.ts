@@ -29,6 +29,18 @@ export class PlantsApiRepo {
 
     return data;
   }
+
+  async deletePlantsRepo(id: string): Promise<void> {
+    const resp = await fetch(this.url + "delete", {
+      method: "DELETE",
+      body: JSON.stringify(id),
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+    if (!resp.ok)
+      throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
+  }
   async getPlantsRepo(token: string, page?: number): Promise<PlantInTheList[]> {
     const resp = await fetch(`${this.url}?page=${page}`, {
       method: "GET",

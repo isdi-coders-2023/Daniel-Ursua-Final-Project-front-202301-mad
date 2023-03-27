@@ -21,8 +21,13 @@ export const plantSlice = createSlice({
     changePlant(state, action) {
       state.actualPlant = action.payload;
     },
+    deletePlant(state, action) {
+      state.plantList = state.plantList.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
 });
 
-export const { changePlantList, changePlant } = plantSlice.actions;
+export const { changePlantList, changePlant, deletePlant } = plantSlice.actions;
 export const plantsReducer = plantSlice.reducer;
