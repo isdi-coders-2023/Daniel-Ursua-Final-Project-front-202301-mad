@@ -7,7 +7,7 @@ import { Provider } from "react-redux";
 import { PlantInTheList, ProtoPlant } from "../models/plant.model";
 import { User } from "../models/user.model";
 import { reducer } from "../reducer/error.slice";
-import { deletePlant, plantsReducer, State } from "../reducer/plant.slice";
+import { plantsReducer, State } from "../reducer/plant.slice";
 import { userReducer } from "../reducer/user.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { usePlants } from "./use.plants";

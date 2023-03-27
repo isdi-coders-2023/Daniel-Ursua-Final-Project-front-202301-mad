@@ -1,5 +1,4 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Id } from "@reduxjs/toolkit/dist/tsHelpers";
 import { Plant, PlantInTheList } from "../models/plant.model";
 import { plantsReducer, State } from "./plant.slice";
 
