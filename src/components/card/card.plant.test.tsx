@@ -22,7 +22,7 @@ beforeEach(() => {
 describe("Given the card plant component", () => {
   describe("When it is render", () => {
     test("Then it should print different elements", async () => {
-      const image = await screen.findByText(/image/i);
+      const image = await screen.findByRole("img");
       expect(image).toBeInTheDocument();
       const location = await screen.findByText(/location/i);
       expect(location).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("Given the card plant component", () => {
   });
   describe("When we click on the component", () => {
     test("It should call the updatePlant method", async () => {
-      const image = await screen.findByText(/image/i);
+      const image = await screen.findByRole("img");
       await fireEvent.click(image);
       expect(usePlants({} as PlantsApiRepo).updatePlant).toHaveBeenCalled();
     });
