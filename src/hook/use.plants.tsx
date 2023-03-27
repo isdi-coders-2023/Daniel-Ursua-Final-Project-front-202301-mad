@@ -4,9 +4,9 @@ import { ProtoPlant } from "../models/plant.model";
 import { setError } from "../reducer/error.slice";
 import { changePlant, changePlantList } from "../reducer/plant.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
-import { storage } from "../services/firebase/firebase";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useCallback } from "react";
+import { storage } from "../services/firebase/firebase";
 
 export function usePlants(repo: PlantsApiRepo) {
   const plants = useSelector((state: RootState) => state.plants);
@@ -18,7 +18,8 @@ export function usePlants(repo: PlantsApiRepo) {
     try {
       const token = users.userLogged?.token;
       if (!token) throw new Error("You must to be logged");
-      const storageRef = ref(storage, info.name);
+      console.log(ref(storage, file.name));
+      const storageRef = ref(storage, file.name);
       await uploadBytes(storageRef, file);
       const imgURL = await getDownloadURL(storageRef);
       info.photo = imgURL;
@@ -30,13 +31,17 @@ export function usePlants(repo: PlantsApiRepo) {
 
   const getPlants = useCallback(async () => {
     try {
+      // debugger;
       const token = users.userLogged?.token;
-      if (!token) throw new Error("You must to be logged");
+      if (!token) {
+        throw new Error("You must to be logged");
+      }
       const actualPlants = plants.plantList;
       const actualPage = Math.ceil(actualPlants.length / 5);
       const result = await repo.getPlantsRepo(token, actualPage + 1);
       dispatch(changePlantList(result));
     } catch (error) {
+      console.log("Error", (error as Error).message);
       dispatch(setError((error as Error).message));
     }
   }, [dispatch, repo, users.userLogged?.token]);
