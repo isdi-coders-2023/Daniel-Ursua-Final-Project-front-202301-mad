@@ -1,28 +1,27 @@
 /* eslint-disable testing-library/no-render-in-setup */
-import { render } from "@testing-library/react";
-import { useEffect } from "react";
-import { Provider } from "react-redux";
-import { store } from "../../app/store";
+import { render, screen } from "@testing-library/react";
+import { usePlants } from "../../hook/use.plants";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 import { Pagination } from "./pagination";
 
-jest.mock("react");
-(useEffect as jest.Mock).mockResolvedValue("test");
+jest.mock("../../hook/use.plants");
 
 const mockRepo = {
   getPlants: jest.fn(),
 } as unknown as PlantsApiRepo;
 
 beforeEach(() => {
-  render(
-    <Provider store={store}>
-      <Pagination></Pagination>
-    </Provider>
-  );
+  (usePlants as jest.Mock).mockReturnValue({
+    getPlants: jest.fn(),
+  });
+  render(<Pagination></Pagination>);
 });
 
 describe("Given the pagination component", () => {
   describe("When it is render", () => {
-    test("Then it should print a button", () => {});
+    test("Then it should print a button", () => {
+      const element = screen.getByRole("button");
+      expect(element).toBeInTheDocument();
+    });
   });
 });
