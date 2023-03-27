@@ -5,17 +5,16 @@ export type MenuOption = {
   path: string;
 };
 
-export const menuOptions: MenuOption[] = [
+export const headerOptions: MenuOption[] = [
   { label: "Plants", path: "/plants" },
-  { label: "My plants", path: "/my-plants" },
   { label: "Add plant", path: "/add" },
+  { label: "Greenhouse", path: "/greenhouse" },
 ];
 
 export function Header() {
   return (
-    <header>
-      <h1>PlantApp</h1>
-      <NavMenu options={menuOptions} />
-    </header>
+    <footer data-testid="header">
+      <NavMenu options={headerOptions} />
+    </footer>
   );
 }
