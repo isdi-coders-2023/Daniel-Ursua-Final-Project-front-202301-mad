@@ -26,6 +26,7 @@ mockRepo = {
   addPlantRepo: jest.fn(),
   getPlantsRepo: jest.fn(),
   getPlantById: jest.fn(),
+  deletePlantsRepo: jest.fn(),
 } as unknown as PlantsApiRepo;
 
 let mockToken = "test" as any;
@@ -70,13 +71,15 @@ const mockStoreFail = configureStore({
 const mockFile = "test" as unknown as File;
 
 const TestComponent = function () {
-  const { addPlant, getPlants, updatePlant } = usePlants(mockRepo);
+  const { addPlant, getPlants, updatePlant, deletePlantById } =
+    usePlants(mockRepo);
 
   return (
     <>
       <button onClick={() => addPlant(mockPayload, mockFile)}>Add</button>
       <button onClick={() => getPlants()}>Get</button>
       <button onClick={() => updatePlant("test")}>Update</button>
+      <button onClick={() => deletePlantById("test")}>Delete</button>
     </>
   );
 };
@@ -94,7 +97,7 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
   describe("And the TestComponent is rendered", () => {
     test("Then, three button should be in the document", async () => {
       const elements = await screen.findAllByRole("button");
-      expect(elements.length).toBe(3);
+      expect(elements.length).toBe(4);
     });
   });
 
@@ -106,17 +109,24 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
     });
   });
   describe("And the get button is clicked", () => {
-    test("Then, the getPlants functions should be called", async () => {
+    test("Then, the getPlants function should be called", async () => {
       const getButton = await screen.findByText(/get/i);
       await userEvent.click(getButton);
       expect(mockRepo.getPlantsRepo).toHaveBeenCalled();
     });
   });
   describe("And the update button is clicked", () => {
-    test("Then, the getById functions should be called", async () => {
+    test("Then, the getById function should be called", async () => {
       const updateButton = await screen.findByText(/update/i);
       await userEvent.click(updateButton);
       expect(mockRepo.getPlantById).toHaveBeenCalled();
+    });
+  });
+  describe("And the delete button is clicked", () => {
+    test("Then, the deletePlantsRepo function should be called", async () => {
+      const deleteButton = await screen.findByText(/delete/i);
+      await userEvent.click(deleteButton);
+      expect(mockRepo.deletePlantsRepo).toHaveBeenCalled();
     });
   });
 });
@@ -150,6 +160,14 @@ describe("Given the same components, but without token in the store", () => {
     test("Update method should throw an error", async () => {
       const updateButtons = await screen.findAllByText(/update/i);
       await act(async () => userEvent.click(updateButtons[1]));
+      const result = mockStoreFail.getState().errors.message;
+      expect(result).toBe("You must to be logged");
+    });
+  });
+  describe("And the delete method in the repo throw errors", () => {
+    test("Delete method should throw an error", async () => {
+      const deleteButtons = await screen.findAllByText(/delete/i);
+      await act(async () => userEvent.click(deleteButtons[1]));
       const result = mockStoreFail.getState().errors.message;
       expect(result).toBe("You must to be logged");
     });

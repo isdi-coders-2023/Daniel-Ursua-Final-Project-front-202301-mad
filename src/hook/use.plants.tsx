@@ -2,7 +2,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../app/store";
 import { ProtoPlant } from "../models/plant.model";
 import { setError } from "../reducer/error.slice";
-import { changePlant, changePlantList } from "../reducer/plant.slice";
+import {
+  changePlant,
+  changePlantList,
+  deletePlant,
+} from "../reducer/plant.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useCallback } from "react";
@@ -54,10 +58,20 @@ export function usePlants(repo: PlantsApiRepo) {
       dispatch(setError((error as Error).message));
     }
   };
+
+  const deletePlantById = async (id: string) => {
+    try {
+      await repo.deletePlantsRepo(id);
+      dispatch(deletePlant(id));
+    } catch (error) {
+      dispatch(setError((error as Error).message));
+    }
+  };
   return {
     plants,
     addPlant,
     getPlants,
     updatePlant,
+    deletePlantById,
   };
 }
