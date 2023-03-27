@@ -67,6 +67,7 @@ export function usePlants(repo: PlantsApiRepo) {
       dispatch(setError((error as Error).message));
     }
   };
+
   return {
     plants,
     addPlant,
