@@ -123,7 +123,6 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
 
 describe("Given the same components, but without token in the store", () => {
   beforeEach(async () => {
-    // mockToken = undefined;
     jest.resetAllMocks();
     render(
       <Provider store={mockStoreFail}>

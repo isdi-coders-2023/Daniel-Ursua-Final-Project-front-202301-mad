@@ -1,7 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { Plant, PlantInTheList } from "../models/plant.model";
 import { plantsReducer, State } from "./plant.slice";
-import { userReducer } from "./user.slice";
 
 const mockPlants = ["Plant1", "Plant2"] as unknown as PlantInTheList[];
 
