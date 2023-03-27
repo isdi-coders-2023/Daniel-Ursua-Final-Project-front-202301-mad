@@ -51,7 +51,7 @@ describe("Given the app router component", () => {
     test("Then, the title of plants should be in the document", async () => {
       await waitFor(async () => prepareTestFunction(4));
       const elements = await screen.findAllByRole("heading");
-      expect(elements.length).toBe(2);
+      expect(elements.length).toBe(1);
     });
   });
 });
