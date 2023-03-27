@@ -2,16 +2,21 @@ import { SyntheticEvent, useMemo } from "react";
 import { usePlants } from "../../hook/use.plants";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 
-export function Delete() {
-  const repo = useMemo(() => new PlantsApiRepo(), []);
-  const { getPlants } = usePlants(repo);
+export type deleteProps = {
+  id: string;
+};
 
-  const handleLoad = async (ev: SyntheticEvent) => {
-    await getPlants();
+export function Delete({ id }: deleteProps) {
+  const repo = useMemo(() => new PlantsApiRepo(), []);
+  const { deletePlantById } = usePlants(repo);
+
+  const handleClick = async (ev: SyntheticEvent) => {
+    await deletePlantById(id);
   };
+
   return (
     <>
-      <button onClick={handleLoad}> Load more</button>
+      <i role="button" onClick={handleClick} className="fa-solid fa-shovel"></i>
     </>
   );
 }
