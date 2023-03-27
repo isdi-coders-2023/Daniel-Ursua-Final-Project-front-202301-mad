@@ -30,7 +30,6 @@ export function usePlants(repo: PlantsApiRepo) {
 
   const getPlants = useCallback(async () => {
     try {
-      // debugger;
       const token = users.userLogged?.token;
       if (!token) {
         throw new Error("You must to be logged");
