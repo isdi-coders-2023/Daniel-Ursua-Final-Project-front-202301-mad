@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { reducer as userRed } from "../reducer/user.slice";
+import { userReducer as userRed } from "../reducer/user.slice";
 import { reducer as errorRed } from "../reducer/error.slice";
-import { reducer as plantRed } from "../reducer/plant.slice";
+import { plantsReducer as plantRed } from "../reducer/plant.slice";
 
 export const store = configureStore({
   reducer: {

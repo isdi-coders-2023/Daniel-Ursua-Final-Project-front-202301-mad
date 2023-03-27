@@ -17,7 +17,7 @@ export type LoginData = {
   user: User;
 };
 
-export const slice = createSlice({
+export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
@@ -33,5 +33,5 @@ export const slice = createSlice({
   },
 });
 
-export const { login, logout } = slice.actions;
-export const { reducer } = slice;
+export const { login, logout } = userSlice.actions;
+export const userReducer = userSlice.reducer;

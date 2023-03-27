@@ -19,4 +19,4 @@ export const slice = createSlice({
 });
 
 export const { setError } = slice.actions;
-export const { reducer } = slice;
+export const reducer = slice.reducer;
