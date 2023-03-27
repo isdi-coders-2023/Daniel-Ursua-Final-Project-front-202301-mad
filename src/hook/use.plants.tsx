@@ -42,7 +42,7 @@ export function usePlants(repo: PlantsApiRepo) {
       console.log("Error", (error as Error).message);
       dispatch(setError((error as Error).message));
     }
-  }, [dispatch, repo, users.userLogged?.token]);
+  }, [dispatch, plants.plantList, repo, users.userLogged?.token]);
 
   const updatePlant = async (id: string) => {
     try {
