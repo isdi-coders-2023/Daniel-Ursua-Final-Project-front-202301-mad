@@ -3,7 +3,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
 import { usePlants } from "../../hook/use.plants";
-import { Delete, deleteProps } from "./delete.plant";
+import { Delete } from "./delete.plant";
 
 jest.mock("../../hook/use.plants");
 jest.mock("../../services/plants.api.repo.ts");
