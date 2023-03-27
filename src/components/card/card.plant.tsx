@@ -3,7 +3,7 @@ import { usePlants } from "../../hook/use.plants";
 import { PlantInTheList } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 
-export type CardProps = {
+type CardProps = {
   info: PlantInTheList;
 };
 
@@ -17,9 +17,11 @@ export default function CardPlant({ info }: CardProps) {
 
   return (
     <div onClick={handleClick}>
-      <span>{info.photo}</span>
-      <p>{info.location}</p>
-      <p>{info.name}</p>
+      <li>
+        <span>{info.photo}</span>
+        <p>{info.location}</p>
+        <p>{info.name}</p>
+      </li>
     </div>
   );
 }

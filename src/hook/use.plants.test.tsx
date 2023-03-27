@@ -1,13 +1,18 @@
 /* eslint-disable testing-library/no-render-in-setup */
 /* eslint-disable testing-library/no-unnecessary-act */
+import { configureStore } from "@reduxjs/toolkit";
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
-import { ProtoPlant } from "../models/plant.model";
+import { PlantInTheList, ProtoPlant } from "../models/plant.model";
+import { User } from "../models/user.model";
+import { reducer } from "../reducer/error.slice";
+import { plantsReducer, State } from "../reducer/plant.slice";
+import { userReducer } from "../reducer/user.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { usePlants } from "./use.plants";
 jest.mock("@firebase/storage");
+jest.mock("../hook/use.users.tsx");
 
 let mockPayload: ProtoPlant;
 let mockRepo: PlantsApiRepo;
@@ -23,31 +28,69 @@ mockRepo = {
   getPlantById: jest.fn(),
 } as unknown as PlantsApiRepo;
 
-const mockFile = "test" as unknown as File;
-
-beforeEach(async () => {
-  const TestComponent = function () {
-    const { addPlant, getPlants, updatePlant } = usePlants(mockRepo);
-
-    return (
-      <>
-        <button onClick={() => addPlant(mockPayload, mockFile)}>Add</button>
-        <button onClick={() => getPlants()}>Get</button>
-        <button onClick={() => updatePlant("test")}>Update</button>
-      </>
-    );
-  };
-
-  await act(async () =>
-    render(
-      <Provider store={store}>
-        <TestComponent></TestComponent>
-      </Provider>
-    )
-  );
+let mockToken = "test" as any;
+const mockStore = configureStore({
+  reducer: {
+    users: userReducer,
+    plants: plantsReducer,
+    errors: reducer,
+  },
+  preloadedState: {
+    users: {
+      userLogged: {
+        token: mockToken,
+        user: { id: "test" } as unknown as User,
+      },
+    },
+    plants: {
+      plantList: [] as unknown as PlantInTheList[],
+    } as unknown as State,
+    errors: {
+      message: "Test error",
+    },
+  },
 });
 
+const mockStoreFail = configureStore({
+  reducer: {
+    users: userReducer,
+    plants: plantsReducer,
+    errors: reducer,
+  },
+  preloadedState: {
+    users: {
+      userLogged: null,
+    },
+    errors: {
+      message: "Test error",
+    },
+  },
+});
+
+const mockFile = "test" as unknown as File;
+
+const TestComponent = function () {
+  const { addPlant, getPlants, updatePlant } = usePlants(mockRepo);
+
+  return (
+    <>
+      <button onClick={() => addPlant(mockPayload, mockFile)}>Add</button>
+      <button onClick={() => getPlants()}>Get</button>
+      <button onClick={() => updatePlant("test")}>Update</button>
+    </>
+  );
+};
 describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestComponent", () => {
+  beforeEach(async () => {
+    await act(async () => {
+      render(
+        <Provider store={mockStore}>
+          <TestComponent></TestComponent>
+        </Provider>
+      );
+    });
+  });
+
   describe("And the TestComponent is rendered", () => {
     test("Then, three button should be in the document", async () => {
       const elements = await screen.findAllByRole("button");
@@ -58,54 +101,57 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
   describe("And the add button is clicked", () => {
     test("Then, the add functions should be called", async () => {
       const addButton = await screen.findByText(/add/i);
-      await act(async () => {
-        await userEvent.click(addButton);
-      });
-
+      await userEvent.click(addButton);
       expect(mockRepo.addPlantRepo).toHaveBeenCalled();
     });
   });
   describe("And the get button is clicked", () => {
     test("Then, the getPlants functions should be called", async () => {
       const getButton = await screen.findByText(/get/i);
-      await act(async () => userEvent.click(getButton));
+      await userEvent.click(getButton);
       expect(mockRepo.getPlantsRepo).toHaveBeenCalled();
     });
   });
   describe("And the update button is clicked", () => {
     test("Then, the getById functions should be called", async () => {
       const updateButton = await screen.findByText(/update/i);
-      await act(async () => userEvent.click(updateButton));
+      await userEvent.click(updateButton);
       expect(mockRepo.getPlantById).toHaveBeenCalled();
     });
   });
+});
 
-  describe("When the hooks methods in the repo throw errors", () => {
-    beforeEach(() => {
-      (mockRepo.addPlantRepo as jest.Mock).mockRejectedValue(new Error("test"));
-      (mockRepo.getPlantsRepo as jest.Mock).mockRejectedValue(
-        new Error("test")
-      );
-      (mockRepo.getPlantById as jest.Mock).mockRejectedValue(new Error("test"));
-    });
-
+describe("Given the same components, but without token in the store", () => {
+  beforeEach(async () => {
+    jest.resetAllMocks();
+    render(
+      <Provider store={mockStoreFail}>
+        <TestComponent></TestComponent>
+      </Provider>
+    );
+  });
+  describe("And the add method in the repo throw errors", () => {
     test("Add method should throw an error", async () => {
-      const addButton = await screen.findByText(/Add/i);
-      await act(async () => userEvent.click(addButton));
-      const result = store.getState().errors.message;
-      expect(result).toBe("test");
+      const addButtons = await screen.findAllByText(/Add/i);
+      userEvent.click(addButtons[1]);
+      const result = await mockStoreFail.getState().errors.message;
+      expect(result).toBe("Test error");
     });
+  });
+  describe("And the get method in the repo throw errors", () => {
     test("Get method should throw an error", async () => {
       const getPlants = await screen.findByText(/get/i);
       await act(async () => userEvent.click(getPlants));
-      const result = store.getState().errors.message;
-      expect(result).toBe("test");
+      const result = mockStoreFail.getState().errors.message;
+      expect(result).toBe("You must to be logged");
     });
+  });
+  describe("And the update method in the repo throw errors", () => {
     test("Update method should throw an error", async () => {
-      const updateButton = await screen.findByText(/update/i);
-      await act(async () => userEvent.click(updateButton));
-      const result = store.getState().errors.message;
-      expect(result).toBe("test");
+      const updateButtons = await screen.findAllByText(/update/i);
+      await act(async () => userEvent.click(updateButtons[1]));
+      const result = mockStoreFail.getState().errors.message;
+      expect(result).toBe("You must to be logged");
     });
   });
 });

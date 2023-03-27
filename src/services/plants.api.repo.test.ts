@@ -1,4 +1,9 @@
-import { Plant, PlantInTheList, ProtoPlant } from "../models/plant.model";
+import {
+  Plant,
+  PlantBackResponse,
+  PlantInTheList,
+  ProtoPlant,
+} from "../models/plant.model";
 import { PlantsApiRepo } from "./plants.api.repo";
 
 const mockResp = {
@@ -8,16 +13,18 @@ const mockResp = {
 const mockPlant = {
   name: "test",
 } as ProtoPlant;
-
-const mockPlants = [
-  {
-    name: "test",
-  },
-  {
-    name: "test2",
-  },
-  { name: "test3" },
-] as PlantInTheList[];
+const mockToken = "test";
+const mockPlants = {
+  results: [
+    {
+      name: "test",
+    },
+    {
+      name: "test2",
+    },
+    { name: "test3" },
+  ] as PlantInTheList[],
+} as PlantBackResponse;
 describe("Given the plants api repo", () => {
   const repo = new PlantsApiRepo();
 
@@ -29,7 +36,7 @@ describe("Given the plants api repo", () => {
   describe("When we call the add method", () => {
     test("if the answer is not ok, then it should throw an error", async () => {
       global.fetch = jest.fn().mockResolvedValue("error");
-      const result = repo.addPlantRepo(mockPlant);
+      const result = repo.addPlantRepo(mockPlant, mockToken);
       await expect(result).rejects.toThrow();
     });
     test("If the answer is ok, then it should return the plant added", async () => {
@@ -37,7 +44,7 @@ describe("Given the plants api repo", () => {
         ok: true,
         json: jest.fn().mockResolvedValue(mockResp),
       });
-      const result = await repo.addPlantRepo(mockPlant);
+      const result = await repo.addPlantRepo(mockPlant, mockToken);
       expect(result).toEqual(mockResp);
     });
   });
@@ -47,7 +54,7 @@ describe("Given the plants api repo", () => {
     describe("And the resp is not ok", () => {
       test("Then it should throw an http error", async () => {
         (global.fetch as jest.Mock).mockResolvedValue("test");
-        const result = repo.getPlantsRepo();
+        const result = repo.getPlantsRepo(mockToken);
         await expect(result).rejects.toThrow();
       });
     });
@@ -57,8 +64,8 @@ describe("Given the plants api repo", () => {
           ok: true,
           json: jest.fn().mockResolvedValue(mockPlants),
         });
-        const result = await repo.getPlantsRepo();
-        expect(result).toBe(mockPlants);
+        const result = await repo.getPlantsRepo(mockToken);
+        expect(result).toBe(mockPlants.results);
       });
     });
   });
@@ -67,7 +74,7 @@ describe("Given the plants api repo", () => {
     describe("And the resp is not ok", () => {
       test("Then it should throw an http error", async () => {
         (global.fetch as jest.Mock).mockResolvedValue("test");
-        const result = repo.getPlantById("test");
+        const result = repo.getPlantById("test", mockToken);
         await expect(result).rejects.toThrow();
       });
     });
@@ -77,7 +84,7 @@ describe("Given the plants api repo", () => {
           ok: true,
           json: jest.fn().mockResolvedValue(mockResp),
         });
-        const result = await repo.getPlantById("test");
+        const result = await repo.getPlantById("test", mockToken);
         expect(result).toBe(mockResp);
       });
     });

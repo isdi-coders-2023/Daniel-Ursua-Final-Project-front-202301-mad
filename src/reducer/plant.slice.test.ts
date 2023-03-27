@@ -1,13 +1,13 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { Plant, PlantInTheList } from "../models/plant.model";
-import { reducer, State } from "./plant.slice";
+import { plantsReducer, State } from "./plant.slice";
 
 const mockPlants = ["Plant1", "Plant2"] as unknown as PlantInTheList[];
 
 const mockPlant = { name: "test", location: "test" } as unknown as Plant;
 
 const mockInitialState: State = {
-  plantList: [],
+  plantList: [] as PlantInTheList[],
   actualPlant: null,
 };
 
@@ -27,7 +27,7 @@ describe("Given the plant slice", () => {
         type: "plant/changePlantList",
         payload: mockPlants,
       };
-      const element = reducer(mockInitialState, mockAction);
+      const element = plantsReducer(mockInitialState, mockAction);
       expect(element).toEqual(mockChanged);
     });
   });
@@ -37,7 +37,7 @@ describe("Given the plant slice", () => {
         type: "plant/changePlant",
         payload: mockPlant,
       };
-      const element = reducer(mockInitialState, mockAction);
+      const element = plantsReducer(mockInitialState, mockAction);
       expect(element).toEqual(mockChanged2);
     });
   });

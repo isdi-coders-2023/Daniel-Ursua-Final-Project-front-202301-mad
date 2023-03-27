@@ -11,12 +11,12 @@ export const initialState: State = {
   actualPlant: null,
 };
 
-export const slice = createSlice({
+export const plantSlice = createSlice({
   name: "plant",
   initialState,
   reducers: {
     changePlantList(state, action) {
-      state.plantList = action.payload;
+      state.plantList = [...state.plantList, ...action.payload];
     },
     changePlant(state, action) {
       state.actualPlant = action.payload;
@@ -24,5 +24,5 @@ export const slice = createSlice({
   },
 });
 
-export const { changePlantList, changePlant } = slice.actions;
-export const { reducer } = slice;
+export const { changePlantList, changePlant } = plantSlice.actions;
+export const plantsReducer = plantSlice.reducer;

@@ -3,10 +3,12 @@ import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hook/use.users";
 import { User } from "../../models/user.model";
 import { UsersApiRepo } from "../../services/users.api.repo";
+import { useNavigate } from "react-router-dom";
 
 export function LogUserForm() {
   const repo = useMemo(() => new UsersApiRepo(), []);
   const { loginUser } = useUsers(repo);
+  const navigate = useNavigate();
 
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -16,7 +18,7 @@ export function LogUserForm() {
       passwd: (formLogUser.elements[1] as HTMLInputElement).value,
     };
     loginUser(logUser);
-
+    navigate("/plants");
     formLogUser.reset();
   };
 

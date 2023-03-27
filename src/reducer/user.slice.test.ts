@@ -1,5 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { State, reducer, LoginData } from "./user.slice";
+import { State, userReducer, LoginData } from "./user.slice";
 
 const mockUser = {
   token: "test",
@@ -19,7 +19,7 @@ describe("Given the user slice", () => {
         type: "user/login",
         payload: mockUser,
       };
-      const element = reducer(mockInitialState, mockAction);
+      const element = userReducer(mockInitialState, mockAction);
       expect(element.userLogged).toEqual(mockUser);
     });
   });
@@ -29,7 +29,7 @@ describe("Given the user slice", () => {
         type: "user/logout",
         payload: mockState,
       };
-      const element = reducer(mockInitialState, mockAction);
+      const element = userReducer(mockInitialState, mockAction);
       expect(element).toEqual(mockState);
     });
   });
