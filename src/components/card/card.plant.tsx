@@ -18,7 +18,7 @@ export default function CardPlant({ info }: CardProps) {
 
   return (
     <div onClick={handleClick}>
-      <li>
+      <li key={info.id}>
         <span>
           <img src={info.photo} alt={info.name} />
         </span>

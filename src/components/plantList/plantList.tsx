@@ -16,7 +16,7 @@ export default function PlantList() {
       <h1>Let's find your plants!</h1>
       <ul>
         {plantsArray.map((item: PlantInTheList) => (
-          <CardPlant info={item} key={item.id}></CardPlant>
+          <CardPlant info={item}></CardPlant>
         ))}
       </ul>
     </>
