@@ -1,6 +1,7 @@
 import { SyntheticEvent, useMemo } from "react";
 import { usePlants } from "../../hook/use.plants";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
+import styles from "./delete.plant.module.scss";
 
 export type deleteProps = {
   id: string;
@@ -14,9 +15,8 @@ export function Delete({ id }: deleteProps) {
   };
 
   return (
-    <button type="button" onClick={handleClick}>
-      Borrar
-      <i role="button" className="fa-solid fa-shovel"></i>
+    <button type="button" onClick={handleClick} className={styles.delete}>
+      Delete
     </button>
   );
 }
