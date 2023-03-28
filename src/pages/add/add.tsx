@@ -1,10 +1,11 @@
 import { PlantForm } from "../../components/forms/plant.form";
+import styles from "./add.module.scss";
 
 export default function AddPage() {
   return (
     <>
-      <h1>Add</h1>
-      <h2>a new plant</h2>
+      <h1 className={styles.h1}>Add</h1>
+      <h2 className={styles.h2}>a new plant</h2>
       <PlantForm></PlantForm>
     </>
   );
