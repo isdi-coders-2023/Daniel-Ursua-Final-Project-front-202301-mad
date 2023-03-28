@@ -13,8 +13,8 @@ export const headerOptions: MenuOption[] = [
 
 export function Header() {
   return (
-    <footer data-testid="header">
+    <header data-testid="header">
       <NavMenu options={headerOptions} />
-    </footer>
+    </header>
   );
 }
