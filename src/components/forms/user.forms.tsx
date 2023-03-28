@@ -4,6 +4,7 @@ import { useUsers } from "../../hook/use.users";
 import { User } from "../../models/user.model";
 import { UsersApiRepo } from "../../services/users.api.repo";
 import { useNavigate } from "react-router-dom";
+import styles from "./logform.module.scss";
 
 export function LogUserForm() {
   const repo = useMemo(() => new UsersApiRepo(), []);
@@ -24,22 +25,25 @@ export function LogUserForm() {
 
   return (
     <>
-      <form className="login-form" data-testid="form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Email"
-          className="login-form__field"
-          name="email"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="login-form__field"
-          name="password"
-          role="textbox"
-        />
-
-        <button type="submit">Login</button>
+      <form className={styles.form} data-testid="form" onSubmit={handleSubmit}>
+        <div className={styles.inputs}>
+          <input
+            type="text"
+            placeholder="Email"
+            name="email"
+            className={styles.email}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className={styles.passwd}
+            name="password"
+            role="textbox"
+          />
+        </div>
+        <button type="submit" className={styles.button}>
+          Login
+        </button>
       </form>
     </>
   );

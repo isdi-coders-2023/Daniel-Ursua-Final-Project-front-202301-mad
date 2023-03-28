@@ -19,7 +19,9 @@ export default function LoginPage() {
         </div>
         <section className={styles.form}>
           <LogUserForm></LogUserForm>
-          Don't have an account? <Link to="/register">Sign up</Link>
+          <p className={styles.sublogin}>
+            Don't have an account? <Link to="/register">Sign up</Link>
+          </p>
         </section>
       </main>
       <p></p>
