@@ -3,6 +3,7 @@ import { SyntheticEvent, useMemo } from "react";
 import { useUsers } from "../../hook/use.users";
 import { User } from "../../models/user.model";
 import { UsersApiRepo } from "../../services/users.api.repo";
+import styles from "./regform.module.scss";
 
 export function RegUserForm() {
   const repo = useMemo(() => new UsersApiRepo(), []);
@@ -23,28 +24,32 @@ export function RegUserForm() {
 
   return (
     <>
-      <form className="reg-form" data-testid="form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="name"
-          className="reg-form__field"
-          name="name"
-        />
-        <input
-          type="text"
-          placeholder="Email"
-          className="reg-form__field"
-          name="email"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="reg-form__field"
-          name="password"
-          role="textbox"
-        />
+      <form className={styles.form} data-testid="form" onSubmit={handleSubmit}>
+        <section className={styles.inputs}>
+          <input
+            type="text"
+            placeholder="name"
+            className={styles.name}
+            name="name"
+          />
+          <input
+            type="text"
+            placeholder="Email"
+            className={styles.email}
+            name="email"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            className={styles.passwd}
+            name="password"
+            role="textbox"
+          />
+        </section>
 
-        <button type="submit">Register</button>
+        <button type="submit" className={styles.button}>
+          Register
+        </button>
       </form>
     </>
   );
