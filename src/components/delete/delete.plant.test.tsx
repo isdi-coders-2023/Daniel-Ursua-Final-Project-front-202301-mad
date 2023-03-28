@@ -10,9 +10,10 @@ jest.mock("../../services/plants.api.repo.ts");
 
 beforeEach(() => {
   (usePlants as jest.Mock).mockReturnValue({ deletePlantById: jest.fn() });
+
   render(
     <Provider store={store}>
-      <Delete id={"test"}></Delete>;
+      <Delete id={"test"}></Delete>
     </Provider>
   );
 });

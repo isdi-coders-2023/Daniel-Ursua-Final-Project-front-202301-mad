@@ -23,6 +23,7 @@ export function useUsers(repo: UsersApiRepo) {
       dispatch(setError((error as Error).message));
     }
   };
+
   return {
     users,
     loginUser,
