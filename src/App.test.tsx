@@ -10,7 +10,7 @@ describe("Given the App component", () => {
           <App></App>
         </Router>
       );
-      const element = screen.getByRole("button");
+      const element = screen.getByText("TEST");
       expect(element).toBeInTheDocument();
     });
   });
