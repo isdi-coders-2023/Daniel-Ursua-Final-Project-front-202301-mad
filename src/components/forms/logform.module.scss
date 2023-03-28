@@ -25,6 +25,12 @@
   border-width: 0;
   padding: 1rem;
 }
+
+.email::placeholder,
+.passwd::placeholder {
+  color: black;
+}
+
 .button {
   border-radius: 3rem;
   width: 16rem;
