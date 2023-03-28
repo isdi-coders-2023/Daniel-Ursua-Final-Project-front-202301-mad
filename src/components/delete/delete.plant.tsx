@@ -14,8 +14,9 @@ export function Delete({ id }: deleteProps) {
   };
 
   return (
-    <>
-      <i role="button" onClick={handleClick} className="fa-solid fa-shovel"></i>
-    </>
+    <button type="button" onClick={handleClick}>
+      Borrar
+      <i role="button" className="fa-solid fa-shovel"></i>
+    </button>
   );
 }

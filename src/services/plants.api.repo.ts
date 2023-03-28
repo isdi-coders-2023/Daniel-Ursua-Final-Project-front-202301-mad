@@ -31,9 +31,8 @@ export class PlantsApiRepo {
   }
 
   async deletePlantsRepo(id: string): Promise<void> {
-    const resp = await fetch(this.url + "delete", {
+    const resp = await fetch(this.url + "/" + id, {
       method: "DELETE",
-      body: JSON.stringify(id),
       headers: {
         "Content-type": "application/json",
       },
