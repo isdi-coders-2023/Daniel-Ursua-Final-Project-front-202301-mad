@@ -23,9 +23,11 @@ export default function CardPlant({ info }: CardProps) {
         <img src={info.photo} alt={info.name} className={styles.photo} />
         <section className={styles.info}>
           <p className={styles.location}>{info.location}</p>
-          <span className={styles.delete}>
+          <span className={styles.name}>
             <p>{info.name}</p>
-            <Delete id={info.id}></Delete>
+            <span className={styles.delete}>
+              <Delete id={info.id}></Delete>
+            </span>
           </span>
         </section>
       </li>
