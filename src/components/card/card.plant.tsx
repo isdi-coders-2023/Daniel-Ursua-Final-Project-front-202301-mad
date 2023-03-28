@@ -3,6 +3,7 @@ import { usePlants } from "../../hook/use.plants";
 import { PlantInTheList } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
 import { Delete } from "../delete/delete.plant";
+import styles from "./card.module.scss";
 
 type CardProps = {
   info: PlantInTheList;
@@ -18,13 +19,15 @@ export default function CardPlant({ info }: CardProps) {
 
   return (
     <div onClick={handleClick}>
-      <li key={info.id}>
-        <span>
-          <img src={info.photo} alt={info.name} />
-        </span>
-        <p>{info.location}</p>
-        <p>{info.name}</p>
-        <Delete id={info.id}></Delete>
+      <li key={info.id} className={styles.card}>
+        <img src={info.photo} alt={info.name} className={styles.photo} />
+        <section className={styles.info}>
+          <p className={styles.location}>{info.location}</p>
+          <span className={styles.delete}>
+            <p>{info.name}</p>
+            <Delete id={info.id}></Delete>
+          </span>
+        </section>
       </li>
     </div>
   );
