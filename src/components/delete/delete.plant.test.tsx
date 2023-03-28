@@ -3,18 +3,14 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
 import { usePlants } from "../../hook/use.plants";
-import { useUsers } from "../../hook/use.users";
 import { Delete } from "./delete.plant";
 
 jest.mock("../../hook/use.plants");
 jest.mock("../../services/plants.api.repo.ts");
-jest.mock("../../hook/use.users");
 
 beforeEach(() => {
   (usePlants as jest.Mock).mockReturnValue({ deletePlantById: jest.fn() });
-  (useUsers as jest.Mock).mockReturnValue({
-    checkUser: jest.fn().mockResolvedValue("test"),
-  });
+
   render(
     <Provider store={store}>
       <Delete id={"test"}></Delete>

@@ -23,22 +23,10 @@ export function useUsers(repo: UsersApiRepo) {
       dispatch(setError((error as Error).message));
     }
   };
-  const checkUser = (id: string): Boolean => {
-    try {
-      const actualUser = users.userLogged?.user.id;
-      if (id !== actualUser) {
-        throw new Error("Unauthorized");
-      }
-      return true;
-    } catch (error) {
-      dispatch(setError((error as Error).message));
-      return false;
-    }
-  };
+
   return {
     users,
     loginUser,
     register,
-    checkUser,
   };
 }
