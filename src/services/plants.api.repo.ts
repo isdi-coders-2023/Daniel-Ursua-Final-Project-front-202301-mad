@@ -3,7 +3,7 @@ import {
   PlantBackResponse,
   PlantInTheList,
   ProtoPlant,
-} from "../models/plant.model";
+} from "../features/plants/models/plant.model";
 
 export interface PlantRepoStructure {
   addPlantRepo(info: ProtoPlant): Promise<Plant>;
@@ -61,7 +61,7 @@ export class PlantsApiRepo {
     });
     if (!resp.ok)
       throw new Error("Error Http: " + resp.status + ". " + resp.statusText);
-    const data = (await resp.json()) as Plant;
-    return data;
+    const data = (await resp.json()) as PlantBackResponse;
+    return data.results[0] as Plant;
   }
 }

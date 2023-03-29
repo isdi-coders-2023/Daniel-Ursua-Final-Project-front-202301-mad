@@ -1,4 +1,4 @@
-import { PlantForm } from "../../components/forms/plant.form";
+import { PlantForm } from "../../core/components/forms/plant.form";
 
 const editOptions = {
   h1: "Edit",

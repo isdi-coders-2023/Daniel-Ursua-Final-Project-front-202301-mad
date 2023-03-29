@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-render-in-setup */
-import PlantList from "../../components/plantList/plantList";
+import PlantList from "../../core/components/plantList/plantList";
 import { MemoryRouter as Router } from "react-router-dom";
-import { store } from "../../app/store";
+import { store } from "../../core/store/store";
 import { Provider } from "react-redux";
 import { render, screen } from "@testing-library/react";
 

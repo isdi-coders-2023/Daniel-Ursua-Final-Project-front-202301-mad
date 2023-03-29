@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { RegUserForm } from "../../components/forms/reg.user.forms";
+import { RegUserForm } from "../../core/components/forms/reg.user.forms";
 import styles from "./register.module.scss";
 
 export default function RegisterPage() {

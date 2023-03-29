@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { MemoryRouter as Router } from "react-router-dom";
-import { store } from "../../app/store";
+import { store } from "../../core/store/store";
 import Add from "./add";
 
 describe("Given the add page", () => {

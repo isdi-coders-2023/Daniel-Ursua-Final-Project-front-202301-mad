@@ -1,5 +1,5 @@
-import { PlantForm } from "../../components/forms/plant.form";
-import { Header } from "../../components/header/header";
+import { PlantForm } from "../../core/components/forms/plant.form";
+import { Header } from "../../core/components/header/header";
 
 const addOptions = {
   h1: "Add",

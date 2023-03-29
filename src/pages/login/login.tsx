@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { LogUserForm } from "../../components/forms/user.forms";
+import { LogUserForm } from "../../core/components/forms/user.forms";
 import styles from "./login.module.scss";
 
 export default function LoginPage() {
