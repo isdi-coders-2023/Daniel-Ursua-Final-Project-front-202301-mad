@@ -4,6 +4,8 @@
   list-style-type: none;
   border-radius: 1rem;
   padding-bottom: 1rem;
+  width: 15rem;
+  height: 20rem;
   .location {
     font-size: 1rem;
     font-family: "Inter", sans-serif;
@@ -29,10 +31,7 @@
   border-bottom-right-radius: 50%;
   border-bottom-left-radius: 30%;
 }
-.card {
-  width: 15rem;
-  height: 20rem;
-}
+
 .name {
   display: flex;
   align-content: space-between;

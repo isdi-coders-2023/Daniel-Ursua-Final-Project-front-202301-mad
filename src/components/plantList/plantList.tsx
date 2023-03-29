@@ -17,7 +17,7 @@ export default function PlantList() {
       <h1 className={styles.h1}>Let's find your plants!</h1>
       <ul className={styles.ul}>
         {plantsArray.map((item: PlantInTheList) => (
-          <CardPlant info={item}></CardPlant>
+          <CardPlant info={item} key={item.id}></CardPlant>
         ))}
       </ul>
     </>
