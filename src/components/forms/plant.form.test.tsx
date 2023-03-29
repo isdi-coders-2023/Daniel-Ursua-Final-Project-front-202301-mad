@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "../../app/store";
 import { usePlants } from "../../hook/use.plants";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
+import { FormProps } from "../../types/formTypes";
 import { PlantForm } from "./plant.form";
 
 jest.mock("../../hook/use.plants");
@@ -17,6 +18,14 @@ let rangeInputs: HTMLInputElement[];
 let petInput: HTMLInputElement;
 let fileInput: HTMLInputElement;
 let button: HTMLInputElement;
+
+const mockTitles = {
+  titles: {
+    h1: "test",
+    h2: "test",
+  },
+} as unknown as FormProps;
+
 describe("Given Add PlantForm component", () => {
   beforeEach(async () => {
     await act(async () => {
@@ -28,7 +37,7 @@ describe("Given Add PlantForm component", () => {
       });
       render(
         <Provider store={store}>
-          <PlantForm></PlantForm>
+          <PlantForm titles={mockTitles.titles}></PlantForm>
         </Provider>
       );
     });
@@ -146,7 +155,7 @@ describe("When the form is called from edit", () => {
       });
       render(
         <Provider store={store}>
-          <PlantForm></PlantForm>
+          <PlantForm titles={mockTitles.titles}></PlantForm>
         </Provider>
       );
     });

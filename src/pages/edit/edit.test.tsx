@@ -1,9 +1,9 @@
 /* eslint-disable testing-library/no-render-in-setup */
 import { render, screen } from "@testing-library/react";
-import Edit from "./edit";
 import { MemoryRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../../app/store";
+import Edit from "./edit";
 beforeEach(() => {
   render(
     <Provider store={store}>

@@ -3,9 +3,10 @@ import { SyntheticEvent, useMemo } from "react";
 import { usePlants } from "../../hook/use.plants";
 import { ProtoPlant, Location } from "../../models/plant.model";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
+import { FormProps } from "../../types/formTypes";
 import styles from "./plant.form.module.scss";
 
-export function PlantForm() {
+export function PlantForm({ titles }: FormProps) {
   const repo = useMemo(() => new PlantsApiRepo(), []);
   const { addPlant, plants } = usePlants(repo);
   const actualPlant = plants.actualPlant;
@@ -33,6 +34,8 @@ export function PlantForm() {
 
   return (
     <>
+      <h1 className={styles.h1}>{titles.h1}</h1>
+      <h2 className={styles.h2}>{titles.h2}</h2>
       <form data-testid="form" onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
