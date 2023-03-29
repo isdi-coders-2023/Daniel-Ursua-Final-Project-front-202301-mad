@@ -1,13 +1,13 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { reducer, State } from "./error.slice";
+import { errorReducer, ErrorState } from "./error.slice";
 
 const mockError = "test error";
 
-const mockInitialState: State = {
+const mockInitialState: ErrorState = {
   message: null,
 };
 
-const mockFinalState: State = {
+const mockFinalState: ErrorState = {
   message: "test error",
 };
 
@@ -18,7 +18,7 @@ describe("Given the error slice", () => {
         type: "error/setError",
         payload: mockError,
       };
-      const element = reducer(mockInitialState, mockAction);
+      const element = errorReducer(mockInitialState, mockAction);
       expect(element).toEqual(mockFinalState);
     });
   });

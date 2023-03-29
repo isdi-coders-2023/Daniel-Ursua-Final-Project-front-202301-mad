@@ -3,7 +3,7 @@ import {
   PlantBackResponse,
   PlantInTheList,
   ProtoPlant,
-} from "../models/plant.model";
+} from "../features/plants/models/plant.model";
 import { PlantsApiRepo } from "./plants.api.repo";
 
 const mockResp = {

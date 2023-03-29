@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type State = {
+export type ErrorState = {
   message: string | null;
 };
 
-export const initialState: State = {
+export const initialState: ErrorState = {
   message: null,
 };
 
@@ -19,4 +19,4 @@ export const slice = createSlice({
 });
 
 export const { setError } = slice.actions;
-export const reducer = slice.reducer;
+export const errorReducer = slice.reducer;

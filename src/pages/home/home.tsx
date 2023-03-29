@@ -25,7 +25,6 @@ export default function Home() {
           Login
         </button>
         <button onClick={handleRegister} className={styles.register}>
-          {" "}
           Register
         </button>
       </div>
