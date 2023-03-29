@@ -1,6 +1,7 @@
 import { SyntheticEvent, useMemo } from "react";
 import { usePlants } from "../../hook/use.plants";
 import { PlantsApiRepo } from "../../services/plants.api.repo";
+import styles from "./pagination.module.scss";
 
 export function Pagination() {
   const repo = useMemo(() => new PlantsApiRepo(), []);
@@ -11,7 +12,9 @@ export function Pagination() {
   };
   return (
     <>
-      <button onClick={handleLoad}> Load more</button>
+      <button onClick={handleLoad} className={styles.button}>
+        Load more
+      </button>
     </>
   );
 }
