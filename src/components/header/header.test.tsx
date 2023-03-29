@@ -4,8 +4,8 @@ import { Header } from "./header";
 import { MemoryRouter as Router } from "react-router-dom";
 
 const mockOptions = [
-  { label: "test", path: "test" },
-  { label: "test2", path: "test2" },
+  { img: "test", path: "test" },
+  { img: "test2", path: "test2" },
 ] as MenuOption[];
 
 describe("Given the header component", () => {

@@ -1,20 +1,19 @@
 import { NavMenu } from "../nav.menu/nav.menu";
-import styles from "./header.module.scss";
 
 export type MenuOption = {
-  label: string;
+  img: string;
   path: string;
 };
 
 export const headerOptions: MenuOption[] = [
-  { label: "Plants", path: "/plants" },
-  { label: "Add plant", path: "/add" },
-  { label: "Logout", path: "/" },
+  { img: "../../../assets/plant-header.png", path: "/plants" },
+  { img: "../../../assets/plus.png", path: "/add" },
+  { img: "../../../assets/exit.png", path: "/" },
 ];
 
 export function Header() {
   return (
-    <header data-testid="header" className={styles.header}>
+    <header data-testid="header">
       <NavMenu options={headerOptions} />
     </header>
   );
