@@ -7,11 +7,11 @@ import { MemoryRouter as Router } from "react-router-dom";
 describe("Given the nav component", () => {
   const mockOptions: MenuOption[] = [
     {
-      label: "test",
+      img: "test",
       path: "test",
     },
     {
-      label: "test2",
+      img: "test2",
       path: "test2",
     },
   ];
