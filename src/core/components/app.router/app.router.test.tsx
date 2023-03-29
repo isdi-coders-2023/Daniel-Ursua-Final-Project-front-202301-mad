@@ -1,7 +1,8 @@
 import { render, waitFor, screen } from "@testing-library/react";
+import React from "react";
 import { Provider } from "react-redux";
 import { MemoryRouter as Router } from "react-router-dom";
-import { store } from "../app/store";
+import { store } from "../../store/store";
 import { AppRouter } from "./app.router";
 
 describe("Given the app router component", () => {

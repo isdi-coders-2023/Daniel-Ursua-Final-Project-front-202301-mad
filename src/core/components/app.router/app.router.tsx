@@ -1,13 +1,13 @@
+import React from "react";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
-const Home = lazy(() => import("../pages/home/home"));
-const Login = lazy(() => import("../pages/login/login"));
-const Register = lazy(() => import("../pages/register/register"));
-const Add = lazy(() => import("../pages/add/add"));
-const PlantList = lazy(() => import("../pages/plantList/plantList"));
-const Edit = lazy(() => import("../pages/edit/edit"));
-//Future rout const Plants = lazy (() => import ('../pages/plants/detail'));
+const Home = lazy(() => import("../../../pages/home/home"));
+const Login = lazy(() => import("../../../pages/login/login"));
+const Register = lazy(() => import("../../../pages/register/register"));
+const Add = lazy(() => import("../../../pages/add/add"));
+const PlantList = lazy(() => import("../../../pages/plantList/plantList"));
+const Edit = lazy(() => import("../../../pages/edit/edit"));
 
 export function AppRouter() {
   return (
