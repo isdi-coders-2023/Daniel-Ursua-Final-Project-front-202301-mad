@@ -31,6 +31,14 @@
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/reportWebVitals.ts",
+      "<rootDir>/src/index.ts",
+      "<rootDir>/src/services/firebase/firebase.config.ts",
+      "<rootDir>/src/store/store.ts"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
