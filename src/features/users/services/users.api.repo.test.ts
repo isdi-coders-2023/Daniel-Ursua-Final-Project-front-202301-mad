@@ -1,8 +1,4 @@
-import {
-  protoUser,
-  User,
-  UserBackResponse,
-} from "../features/users/models/user.model";
+import { protoUser, User, UserBackResponse } from "../models/user.model";
 import { UsersApiRepo } from "./users.api.repo";
 
 const mockResp = {
