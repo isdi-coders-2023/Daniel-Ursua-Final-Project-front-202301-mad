@@ -1,4 +1,5 @@
 import { NavMenu } from "../nav.menu/nav.menu";
+import styles from "./header.module.scss";
 
 export type MenuOption = {
   label: string;
@@ -8,12 +9,12 @@ export type MenuOption = {
 export const headerOptions: MenuOption[] = [
   { label: "Plants", path: "/plants" },
   { label: "Add plant", path: "/add" },
-  { label: "Greenhouse", path: "/greenhouse" },
+  { label: "Logout", path: "/" },
 ];
 
 export function Header() {
   return (
-    <header data-testid="header">
+    <header data-testid="header" className={styles.header}>
       <NavMenu options={headerOptions} />
     </header>
   );
