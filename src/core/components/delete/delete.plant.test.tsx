@@ -6,7 +6,7 @@ import { usePlants } from "../../../features/plants/hooks/use.plants";
 import { Delete } from "./delete.plant";
 
 jest.mock("../../../features/plants/hooks/use.plants.tsx");
-jest.mock("../../services/plants.api.repo.ts");
+jest.mock("../../../features/plants/services/plants.api.repo");
 
 beforeEach(() => {
   (usePlants as jest.Mock).mockReturnValue({ deletePlantById: jest.fn() });

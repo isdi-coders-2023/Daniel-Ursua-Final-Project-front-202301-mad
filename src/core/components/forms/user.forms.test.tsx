@@ -9,7 +9,7 @@ import { UsersApiRepo } from "../../../features/users/services/users.api.repo";
 import { LogUserForm } from "./user.forms";
 import { MemoryRouter as Router } from "react-router-dom";
 
-jest.mock("../../hook/use.users");
+jest.mock("../../../features/users/hooks/use.users.tsx");
 
 describe("Given LogUserForm component", () => {
   beforeEach(async () => {

@@ -8,7 +8,7 @@ import {
 import { PlantsApiRepo } from "../../../services/plants.api.repo";
 import CardPlant from "./card.plant";
 
-jest.mock("../../services/plants.api.repo.ts");
+jest.mock("../../../features/plants/services/plants.api.repo");
 jest.mock("../../../features/plants/hooks/use.plants.tsx");
 
 const mockPlant: PlantInTheList = {
