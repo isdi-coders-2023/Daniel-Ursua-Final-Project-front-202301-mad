@@ -7,14 +7,15 @@ export type MenuProps = {
 };
 
 export function NavMenu({ options }: MenuProps) {
-  console.log({ options });
   return (
     <nav>
       <ul className={styles.ul}>
         {options.map((item: MenuOption) => (
-          <li key={item.label} className={styles.item}>
-            <Link to={item.path}>{item.label}</Link>
-          </li>
+          <span className={styles.icons}>
+            <Link to={item.path}>
+              <img src={item.img} className={styles.icon} alt="test" />
+            </Link>
+          </span>
         ))}
       </ul>
     </nav>
