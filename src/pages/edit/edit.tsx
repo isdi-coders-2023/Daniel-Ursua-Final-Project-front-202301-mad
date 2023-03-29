@@ -1,11 +1,14 @@
 import { PlantForm } from "../../components/forms/plant.form";
 
-export default function edit() {
+const editOptions = {
+  h1: "Edit",
+  h2: "your plant",
+};
+
+export default function EditPage() {
   return (
     <>
-      <h1>Edit</h1>
-      <h2>your plant</h2>
-      <PlantForm></PlantForm>
+      <PlantForm titles={editOptions}></PlantForm>
     </>
   );
 }
