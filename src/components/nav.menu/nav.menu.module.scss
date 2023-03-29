@@ -1,0 +1,17 @@
+.ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 100%;
+  padding: 0;
+  justify-content: space-around;
+}
+
+.item {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: min-content;
+  text-decoration: inherit;
+  color: red;
+}
