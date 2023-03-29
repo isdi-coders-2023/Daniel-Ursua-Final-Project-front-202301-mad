@@ -4,7 +4,7 @@ import { usePlants } from "../../../features/plants/hooks/use.plants";
 import { PlantsApiRepo } from "../../../services/plants.api.repo";
 import { Pagination } from "./pagination";
 
-jest.mock("../../hook/use.plants");
+jest.mock("../../../features/plants/hooks/use.plants.tsx");
 
 const mockRepo = {
   getPlants: jest.fn(),

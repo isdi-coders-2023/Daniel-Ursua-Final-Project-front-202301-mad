@@ -5,7 +5,7 @@ import { store } from "../../store/store";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
 import { Delete } from "./delete.plant";
 
-jest.mock("../../hook/use.plants");
+jest.mock("../../../features/plants/hooks/use.plants.tsx");
 jest.mock("../../services/plants.api.repo.ts");
 
 beforeEach(() => {

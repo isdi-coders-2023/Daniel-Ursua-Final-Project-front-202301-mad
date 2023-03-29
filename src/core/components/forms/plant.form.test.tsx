@@ -9,7 +9,7 @@ import { PlantsApiRepo } from "../../../services/plants.api.repo";
 import { FormProps } from "../../../types/formTypes";
 import { PlantForm } from "./plant.form";
 
-jest.mock("../../hook/use.plants");
+jest.mock("../../../features/plants/hooks/use.plants.tsx");
 
 let textInput: HTMLInputElement;
 let radioInputs: HTMLInputElement[];
