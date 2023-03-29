@@ -1,7 +1,7 @@
 import { SyntheticEvent, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../../../features/plants/services/plants.api.repo";
 import styles from "./edit.module.scss";
 
 export type editProps = {

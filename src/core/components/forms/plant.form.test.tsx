@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { store } from "../../store/store";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../../../features/plants/services/plants.api.repo";
 import { FormProps } from "../../../types/formTypes";
 import { PlantForm } from "./plant.form";
 

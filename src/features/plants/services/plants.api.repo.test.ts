@@ -3,13 +3,17 @@ import {
   PlantBackResponse,
   PlantInTheList,
   ProtoPlant,
-} from "../features/plants/models/plant.model";
+} from "../../../features/plants/models/plant.model";
 import { PlantsApiRepo } from "./plants.api.repo";
 
 const mockResp = {
-  name: "test",
-  location: "test",
-} as unknown as Plant;
+  results: [
+    {
+      name: "test",
+      location: "test",
+    } as unknown as Plant,
+  ],
+};
 
 const mockPlant = {
   name: "test",
@@ -102,7 +106,7 @@ describe("Given the get plants by Id in the repo", () => {
         json: jest.fn().mockResolvedValue(mockResp),
       });
       const result = await repo.getPlantById("test", mockToken);
-      expect(result).toBe(mockResp);
+      expect(result).toEqual({ location: "test", name: "test" });
     });
   });
 });

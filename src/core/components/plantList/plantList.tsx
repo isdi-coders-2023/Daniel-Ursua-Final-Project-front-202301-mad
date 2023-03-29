@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
 import { PlantInTheList } from "../../../features/plants/models/plant.model";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../../../features/plants/services/plants.api.repo";
 import CardPlant from "../card/card.plant";
 import styles from "./plantList.module.scss";
 

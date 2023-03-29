@@ -3,7 +3,7 @@ import {
   PlantBackResponse,
   PlantInTheList,
   ProtoPlant,
-} from "../features/plants/models/plant.model";
+} from "../models/plant.model";
 
 export interface PlantRepoStructure {
   addPlantRepo(info: ProtoPlant): Promise<Plant>;

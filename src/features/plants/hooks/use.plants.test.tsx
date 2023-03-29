@@ -9,10 +9,9 @@ import { User } from "../../users/models/user.model";
 import { errorReducer } from "../../../reducer/error.slice";
 import { plantsReducer, PlantsState } from "../reducer/plant.slice";
 import { userReducer } from "../../users/reducer/user.slice";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../services/plants.api.repo";
 import { usePlants } from "./use.plants";
 jest.mock("@firebase/storage");
-jest.mock("../hook/use.users.tsx");
 
 let mockPayload: ProtoPlant;
 let mockRepo: PlantsApiRepo;
@@ -134,11 +133,13 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
 describe("Given the same components, but without token in the store", () => {
   beforeEach(async () => {
     jest.resetAllMocks();
-    render(
-      <Provider store={mockStoreFail}>
-        <TestComponent></TestComponent>
-      </Provider>
-    );
+    await act(async () => {
+      render(
+        <Provider store={mockStoreFail}>
+          <TestComponent></TestComponent>
+        </Provider>
+      );
+    });
   });
   describe("And the add method in the repo throw errors", () => {
     test("Add method should throw an error", async () => {

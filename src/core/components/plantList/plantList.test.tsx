@@ -10,7 +10,7 @@ import { store } from "../../store/store";
 import { PlantInTheList } from "../../../features/plants/models/plant.model";
 
 jest.mock("../card/card.plant.tsx");
-jest.mock("../../hook/use.plants.tsx");
+jest.mock("../../../features/plants/hooks/use.plants.tsx");
 
 beforeEach(async () => {
   await act(async () => {

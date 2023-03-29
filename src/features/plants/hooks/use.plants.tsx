@@ -7,7 +7,7 @@ import {
   changePlantList,
   deletePlant,
 } from "../reducer/plant.slice";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../services/plants.api.repo";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useCallback } from "react";
 import { storage } from "../../../core/services/firebase/firebase";
@@ -39,7 +39,6 @@ export function usePlants(repo: PlantsApiRepo) {
       }
       const actualPlants = plants.plantList;
       const actualPage = Math.ceil(actualPlants.length / 5);
-      // debugger;
       const result = await repo.getPlantsRepo(token, actualPage + 1);
       dispatch(changePlantList(result));
     } catch (error) {

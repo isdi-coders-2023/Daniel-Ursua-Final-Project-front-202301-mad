@@ -5,7 +5,7 @@ import {
   ProtoPlant,
   Location,
 } from "../../../features/plants/models/plant.model";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../../../features/plants/services/plants.api.repo";
 import { FormProps } from "../../../types/formTypes";
 import styles from "./plant.form.module.scss";
 

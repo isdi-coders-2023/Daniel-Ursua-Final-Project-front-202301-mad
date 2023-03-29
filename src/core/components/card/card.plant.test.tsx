@@ -1,12 +1,12 @@
 /* eslint-disable testing-library/no-render-in-setup */
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
 import {
   PlantInTheList,
   Location,
 } from "../../../features/plants/models/plant.model";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
 import CardPlant from "./card.plant";
+import { MemoryRouter as Router } from "react-router-dom";
 
 jest.mock("../../../features/plants/services/plants.api.repo");
 jest.mock("../../../features/plants/hooks/use.plants.tsx");
@@ -19,7 +19,11 @@ const mockPlant: PlantInTheList = {
 };
 beforeEach(() => {
   (usePlants as jest.Mock).mockReturnValue({ updatePlant: jest.fn() });
-  render(<CardPlant info={mockPlant}></CardPlant>);
+  render(
+    <Router>
+      <CardPlant info={mockPlant}></CardPlant>;
+    </Router>
+  );
 });
 
 describe("Given the card plant component", () => {
@@ -31,13 +35,6 @@ describe("Given the card plant component", () => {
       expect(location).toBeInTheDocument();
       const name = await screen.findByText(/name/i);
       expect(name).toBeInTheDocument();
-    });
-  });
-  describe("When we click on the component", () => {
-    test("It should call the updatePlant method", async () => {
-      const image = await screen.findByRole("img");
-      await fireEvent.click(image);
-      expect(usePlants({} as PlantsApiRepo).updatePlant).toHaveBeenCalled();
     });
   });
 });

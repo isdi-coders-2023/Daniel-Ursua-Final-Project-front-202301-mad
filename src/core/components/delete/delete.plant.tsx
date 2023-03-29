@@ -1,6 +1,6 @@
 import { SyntheticEvent, useMemo } from "react";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../../../features/plants/services/plants.api.repo";
 import styles from "./delete.plant.module.scss";
 
 export type deleteProps = {

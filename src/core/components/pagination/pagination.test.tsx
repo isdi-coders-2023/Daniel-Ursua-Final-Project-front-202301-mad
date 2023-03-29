@@ -1,7 +1,7 @@
 /* eslint-disable testing-library/no-render-in-setup */
 import { render, screen } from "@testing-library/react";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
-import { PlantsApiRepo } from "../../../services/plants.api.repo";
+import { PlantsApiRepo } from "../../../features/plants/services/plants.api.repo";
 import { Pagination } from "./pagination";
 
 jest.mock("../../../features/plants/hooks/use.plants.tsx");

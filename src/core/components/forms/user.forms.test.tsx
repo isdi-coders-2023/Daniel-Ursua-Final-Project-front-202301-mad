@@ -51,10 +51,13 @@ describe("Given LogUserForm component", () => {
       await userEvent.type(inputs[0], "test");
       await userEvent.type(inputs[1], "test");
       const button = screen.getByRole("button");
-      await userEvent.click(button);
-      expect(useUsers(usersMockRepo).loginUser).toHaveBeenCalledWith({
-        email: "test",
-        passwd: "test",
+      await act(async () => {
+        await userEvent.click(button);
+
+        expect(useUsers(usersMockRepo).loginUser).toHaveBeenCalledWith({
+          email: "test",
+          passwd: "test",
+        });
       });
     });
   });
