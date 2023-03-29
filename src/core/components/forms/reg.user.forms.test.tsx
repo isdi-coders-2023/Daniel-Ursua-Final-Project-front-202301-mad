@@ -8,7 +8,7 @@ import { useUsers } from "../../../features/users/hooks/use.users";
 import { UsersApiRepo } from "../../../features/users/services/users.api.repo";
 import { RegUserForm } from "./reg.user.forms";
 
-jest.mock("../../hook/use.users");
+jest.mock("../../../features/users/hooks/use.users.tsx");
 
 describe("Given RegUserForm component", () => {
   beforeEach(async () => {
