@@ -5,9 +5,9 @@ import PlantList from "../../components/plantList/plantList";
 export default function PlantListPage() {
   return (
     <>
-      <Header></Header>
       <PlantList></PlantList>
       <Pagination></Pagination>
+      <Header></Header>
     </>
   );
 }
