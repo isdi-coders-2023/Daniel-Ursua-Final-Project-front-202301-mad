@@ -24,7 +24,7 @@
   }
   .edit {
     display: flex;
-    align-content: space-between;
+    justify-content: space-between;
     align-items: center;
   }
 }
@@ -39,6 +39,6 @@
 
 .name {
   display: flex;
-  align-content: space-between;
+  justify-content: space-between;
   align-items: center;
 }
