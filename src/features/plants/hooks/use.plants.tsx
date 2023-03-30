@@ -33,7 +33,6 @@ export function usePlants(repo: PlantsApiRepo) {
 
   const getPlants = useCallback(
     async (page?: number) => {
-      debugger;
       try {
         const token = users.userLogged?.token;
         if (!token) {
