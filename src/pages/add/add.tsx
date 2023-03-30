@@ -1,11 +1,16 @@
-import { PlantForm } from "../../components/forms/plant.form";
+import { PlantForm } from "../../core/components/forms/plant.form";
+import { Header } from "../../core/components/header/header";
+
+const addOptions = {
+  h1: "Add",
+  h2: "a new plant",
+};
 
 export default function AddPage() {
   return (
     <>
-      <h1>Add</h1>
-      <h2>a new plant</h2>
-      <PlantForm></PlantForm>
+      <PlantForm titles={addOptions}></PlantForm>
+      <Header></Header>
     </>
   );
 }

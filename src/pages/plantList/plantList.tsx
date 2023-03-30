@@ -1,13 +1,16 @@
-import { Header } from "../../components/header/header";
-import { Pagination } from "../../components/pagination/pagination";
-import PlantList from "../../components/plantList/plantList";
+import { Header } from "../../core/components/header/header";
+import { Pagination } from "../../core/components/pagination/pagination";
+import PlantList from "../../core/components/plantList/plantList";
+import styles from "./plantList.module.scss";
 
 export default function PlantListPage() {
   return (
     <>
-      <Header></Header>
       <PlantList></PlantList>
-      <Pagination></Pagination>
+      <span className={styles.pagination}>
+        <Pagination></Pagination>
+      </span>
+      <Header></Header>
     </>
   );
 }
