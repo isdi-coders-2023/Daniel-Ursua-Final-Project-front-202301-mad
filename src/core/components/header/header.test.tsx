@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { MenuOption } from "./header";
-import { Header } from "./header";
+import { Header, MenuOption } from "./header";
 import { MemoryRouter as Router } from "react-router-dom";
 
 const mockOptions = [
