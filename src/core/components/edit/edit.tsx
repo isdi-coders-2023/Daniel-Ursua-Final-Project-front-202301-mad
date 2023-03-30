@@ -8,7 +8,6 @@ export type editProps = {
   id: string;
 };
 export function Edit({ id }: editProps) {
-  debugger;
   const repo = useMemo(() => new PlantsApiRepo(), []);
   const { updatePlant } = usePlants(repo);
   const navigate = useNavigate();

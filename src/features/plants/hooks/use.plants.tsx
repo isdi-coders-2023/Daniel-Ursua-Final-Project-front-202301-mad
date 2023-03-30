@@ -31,20 +31,22 @@ export function usePlants(repo: PlantsApiRepo) {
     }
   };
 
-  const getPlants = useCallback(async () => {
-    try {
-      const token = users.userLogged?.token;
-      if (!token) {
-        throw new Error("You must to be logged");
+  const getPlants = useCallback(
+    async (page?: number) => {
+      debugger;
+      try {
+        const token = users.userLogged?.token;
+        if (!token) {
+          throw new Error("You must to be logged");
+        }
+        const result = await repo.getPlantsRepo(token, page);
+        dispatch(changePlantList(result));
+      } catch (error) {
+        dispatch(setError((error as Error).message));
       }
-      const actualPlants = plants.plantList;
-      const actualPage = Math.ceil(actualPlants.length / 5);
-      const result = await repo.getPlantsRepo(token, actualPage + 1);
-      dispatch(changePlantList(result));
-    } catch (error) {
-      dispatch(setError((error as Error).message));
-    }
-  }, [dispatch, users.userLogged?.token]);
+    },
+    [dispatch, users.userLogged?.token]
+  );
 
   const updatePlant = async (id: string) => {
     try {

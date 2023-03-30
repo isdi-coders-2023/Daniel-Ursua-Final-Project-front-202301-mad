@@ -1,21 +1,16 @@
-import { act, render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import App from "./App";
-import { BrowserRouter as Router } from "react-router-dom";
+import { AppRouter } from "../components/app.router/app.router";
 
+jest.mock("../components/app.router/app.router.tsx");
 describe("Given the App component", () => {
   describe("When it is render", () => {
-    test("Then it should print a heading", async () => {
+    test("Then it should call app router", async () => {
       // eslint-disable-next-line testing-library/no-unnecessary-act
-      await act(async () => {
-        render(
-          <Router>
-            <App></App>
-          </Router>
-        );
-      });
 
-      const element = screen.getByText("TEST");
-      expect(element).toBeInTheDocument();
+      render(<App></App>);
+
+      expect(AppRouter).toHaveBeenCalled();
     });
   });
 });

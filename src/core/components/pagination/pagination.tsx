@@ -8,7 +8,7 @@ export function Pagination() {
   const { getPlants } = usePlants(repo);
 
   const handleLoad = async (ev: SyntheticEvent) => {
-    await getPlants();
+    await getPlants(3);
   };
   return (
     <>
