@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import PlantList from "../../../core/components/plantList/plantList";
 import { Plant, PlantInTheList } from "../models/plant.model";
 
 export type PlantsState = {
@@ -16,7 +17,7 @@ export const plantSlice = createSlice({
   initialState,
   reducers: {
     changePlantList(state, action) {
-      state.plantList = [...action.payload];
+      state.plantList = [...state.plantList, ...action.payload];
     },
     changePlant(state, action) {
       state.actualPlant = action.payload;

@@ -10,7 +10,7 @@ export default function PlantList() {
   const { getPlants, plants } = usePlants(repo);
 
   useEffect(() => {
-    getPlants(1);
+    getPlants();
   }, []);
 
   return (
