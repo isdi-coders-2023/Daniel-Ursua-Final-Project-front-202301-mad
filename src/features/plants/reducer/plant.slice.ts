@@ -16,7 +16,13 @@ export const plantSlice = createSlice({
   initialState,
   reducers: {
     changePlantList(state, action) {
-      state.plantList = [...action.payload];
+      const strPLantList = state.plantList.map((e) => JSON.stringify(e));
+      state.plantList = [
+        ...state.plantList,
+        ...action.payload.filter(
+          (e: PlantInTheList) => !strPLantList.includes(JSON.stringify(e))
+        ),
+      ];
     },
     changePlant(state, action) {
       state.actualPlant = action.payload;
