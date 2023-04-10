@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import PlantList from "../../../core/components/plantList/plantList";
 import { Plant, PlantInTheList } from "../models/plant.model";
 
 export type PlantsState = {

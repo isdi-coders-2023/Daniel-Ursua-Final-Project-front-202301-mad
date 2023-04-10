@@ -11,7 +11,7 @@ export default function PlantList() {
 
   useEffect(() => {
     getPlants();
-  }, []);
+  });
 
   return (
     <>
