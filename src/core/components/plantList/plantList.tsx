@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo } from "react";
 import { usePlants } from "../../../features/plants/hooks/use.plants";
 import { PlantInTheList } from "../../../features/plants/models/plant.model";
@@ -10,8 +11,9 @@ export default function PlantList() {
   const { getPlants, plants } = usePlants(repo);
 
   useEffect(() => {
+    console.log("test");
     getPlants();
-  });
+  }, []);
 
   return (
     <>
