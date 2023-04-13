@@ -11,7 +11,6 @@ export default function PlantList() {
   const { getPlants, plants } = usePlants(repo);
 
   useEffect(() => {
-    console.log("test");
     getPlants();
   }, []);
 
