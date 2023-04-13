@@ -8,7 +8,7 @@ export interface UserRepoStructure {
 export class UsersApiRepo {
   url: string;
   constructor() {
-    this.url = "http://localhost:4500/users/";
+    this.url = "https://daniel-ursua-plantapp.onrender.com/users/";
   }
   async registerUserRepo(user: Partial<User>): Promise<User> {
     const resp = await fetch(this.url + "register", {

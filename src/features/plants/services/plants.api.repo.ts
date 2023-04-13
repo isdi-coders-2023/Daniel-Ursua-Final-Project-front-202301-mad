@@ -12,7 +12,7 @@ export interface PlantRepoStructure {
 export class PlantsApiRepo {
   url: string;
   constructor() {
-    this.url = "http://localhost:4500/plants/";
+    this.url = "https://daniel-ursua-plantapp.onrender.com/plants";
   }
   async addPlantRepo(info: ProtoPlant, token: string): Promise<Plant> {
     const resp = await fetch(this.url + "add", {
