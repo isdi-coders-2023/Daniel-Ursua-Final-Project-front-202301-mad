@@ -6,6 +6,14 @@ const mockPlants = ["Plant1", "Plant2"] as unknown as PlantInTheList[];
 
 const mockPlant = { name: "test", location: "test" } as unknown as Plant;
 
+const mockNewPlant = ["Plant3"] as unknown as PlantInTheList[];
+
+const mockMorePlants = [
+  "Plant1",
+  "Plant2",
+  "Plant3",
+] as unknown as PlantInTheList[];
+
 const mockPlantsID = [
   {
     id: "test 1",
@@ -37,6 +45,10 @@ const mockInitialState: PlantsState = {
   actualPlant: null,
 };
 
+const mockNewInitialState: PlantsState = {
+  plantList: mockMorePlants,
+  actualPlant: null,
+};
 const mockChanged: PlantsState = {
   plantList: mockPlants,
   actualPlant: null,
@@ -47,7 +59,7 @@ const mockChanged2: PlantsState = {
 };
 
 describe("Given the plant slice", () => {
-  describe("When we call the getPlants method", () => {
+  describe("When we call the changePlantList method for the first time", () => {
     test("Then it should change the state", () => {
       const mockAction: PayloadAction<PlantInTheList[]> = {
         type: "plant/changePlantList",
@@ -55,6 +67,16 @@ describe("Given the plant slice", () => {
       };
       const element = plantsReducer(mockInitialState, mockAction);
       expect(element).toEqual(mockChanged);
+    });
+  });
+  describe("When we call the changePlantList method to add more plants", () => {
+    test("Then it should change the state", () => {
+      const mockAction: PayloadAction<PlantInTheList[]> = {
+        type: "plant/changePlantList",
+        payload: mockNewPlant,
+      };
+      const element = plantsReducer(mockChanged, mockAction);
+      expect(element).toEqual(mockNewInitialState);
     });
   });
   describe("When we call the changePlant method", () => {

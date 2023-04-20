@@ -59,15 +59,18 @@ describe("Given the delete method", () => {
   describe("And the resp is not ok", () => {
     test("Then it should throw an error", async () => {
       global.fetch = jest.fn().mockResolvedValue("error");
-      const result = repo.deletePlantsRepo("test id");
+      const result = repo.deletePlantsRepo("test id", "test token");
       await expect(result).rejects.toThrow();
     });
   });
   describe("And the resp is ok", () => {
-    test("Then it should throw an error", async () => {
-      global.fetch = jest.fn().mockResolvedValue("error");
-      const result = repo.deletePlantsRepo("test id");
-      await expect(result).rejects.toThrow();
+    test("Then the response should be undefined", async () => {
+      global.fetch = jest.fn().mockResolvedValue({
+        ok: true,
+        json: jest.fn().mockResolvedValue(mockResp),
+      });
+      const result = await repo.deletePlantsRepo("test id", "test token");
+      expect(result).toBe(undefined);
     });
   });
 });

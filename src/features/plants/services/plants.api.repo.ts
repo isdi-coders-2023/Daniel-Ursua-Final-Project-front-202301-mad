@@ -30,11 +30,11 @@ export class PlantsApiRepo {
     return data;
   }
 
-  async deletePlantsRepo(id: string): Promise<void> {
+  async deletePlantsRepo(id: string, token: string): Promise<void> {
     const resp = await fetch(this.url + "/" + id, {
       method: "DELETE",
       headers: {
-        "Content-type": "application/json",
+        Authorization: "Bearer " + token,
       },
     });
     if (!resp.ok)
