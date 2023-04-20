@@ -62,7 +62,7 @@ export function usePlants(repo: PlantsApiRepo) {
     try {
       const token = users.userLogged?.token;
       if (!token) throw new Error("You must be logged");
-      await repo.deletePlantsRepo(id);
+      await repo.deletePlantsRepo(id, token);
       dispatch(deletePlant(id));
     } catch (error) {
       dispatch(setError((error as Error).message));
