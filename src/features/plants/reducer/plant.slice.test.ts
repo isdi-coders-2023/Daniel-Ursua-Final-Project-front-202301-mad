@@ -46,7 +46,7 @@ const mockInitialState: PlantsState = {
 };
 
 const mockNewInitialState: PlantsState = {
-  plantList: mockMorePlants as PlantInTheList[],
+  plantList: mockMorePlants,
   actualPlant: null,
 };
 const mockChanged: PlantsState = {

@@ -27,8 +27,8 @@ describe("Given the pagination component", () => {
   describe("When the user click on it", () => {
     test("Then, getPlants should be called", async () => {
       const button = screen.getByRole("button");
-      fireEvent.click(button);
-      await expect(usePlants(mockRepo).getPlants).toHaveBeenCalled();
+      await fireEvent.click(button);
+      expect(usePlants(mockRepo).getPlants).toHaveBeenCalled();
     });
   });
 });
