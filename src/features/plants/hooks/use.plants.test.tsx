@@ -11,6 +11,7 @@ import { plantsReducer, PlantsState } from "../reducer/plant.slice";
 import { userReducer } from "../../users/reducer/user.slice";
 import { PlantsApiRepo } from "../services/plants.api.repo";
 import { usePlants } from "./use.plants";
+
 jest.mock("@firebase/storage");
 
 let mockPayload: ProtoPlant;
@@ -61,8 +62,11 @@ const mockStoreFail = configureStore({
     users: {
       userLogged: null,
     },
+    plants: {
+      plantList: [] as unknown as PlantInTheList[],
+    } as unknown as PlantsState,
     errors: {
-      message: "Test error",
+      message: "",
     },
   },
 });
@@ -132,7 +136,6 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
 
 describe("Given the same components, but without token in the store", () => {
   beforeEach(async () => {
-    jest.resetAllMocks();
     await act(async () => {
       render(
         <Provider store={mockStoreFail}>
@@ -143,10 +146,10 @@ describe("Given the same components, but without token in the store", () => {
   });
   describe("And the add method in the repo throw errors", () => {
     test("Add method should throw an error", async () => {
-      const addButtons = await screen.findAllByText(/Add/i);
-      userEvent.click(addButtons[1]);
+      const addButton = await screen.findByText(/add/i);
+      await userEvent.click(addButton);
       const result = await mockStoreFail.getState().errors.message;
-      expect(result).toBe("Test error");
+      expect(result).toBe("You must be logged");
     });
   });
   describe("And the get method in the repo throw errors", () => {
@@ -154,23 +157,23 @@ describe("Given the same components, but without token in the store", () => {
       const getPlants = await screen.findByText(/get/i);
       await act(async () => userEvent.click(getPlants));
       const result = mockStoreFail.getState().errors.message;
-      expect(result).toBe("You must to be logged");
+      expect(result).toBe("You must be logged");
     });
   });
   describe("And the update method in the repo throw errors", () => {
     test("Update method should throw an error", async () => {
-      const updateButtons = await screen.findAllByText(/update/i);
-      await act(async () => userEvent.click(updateButtons[1]));
+      const updateButton = await screen.findByText(/update/i);
+      await act(async () => userEvent.click(updateButton));
       const result = mockStoreFail.getState().errors.message;
-      expect(result).toBe("You must to be logged");
+      expect(result).toBe("You must be logged");
     });
   });
   describe("And the delete method in the repo throw errors", () => {
     test("Delete method should throw an error", async () => {
-      const deleteButtons = await screen.findAllByText(/delete/i);
-      await act(async () => userEvent.click(deleteButtons[1]));
+      const deleteButton = await screen.findByText(/delete/i);
+      await act(async () => userEvent.click(deleteButton));
       const result = mockStoreFail.getState().errors.message;
-      expect(result).toBe("You must to be logged");
+      expect(result).toBe("You must be logged");
     });
   });
 });

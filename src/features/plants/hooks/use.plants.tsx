@@ -18,15 +18,17 @@ export function usePlants(repo: PlantsApiRepo) {
   const users = useSelector((state: RootState) => state.users);
 
   const addPlant = async (info: ProtoPlant, file: File) => {
+    console.log("add");
     try {
       const token = users.userLogged?.token;
-      if (!token) throw new Error("You must to be logged");
+      if (!token) throw new Error("You must be logged");
       const storageRef = ref(storage, file.name);
       await uploadBytes(storageRef, file);
       const imgURL = await getDownloadURL(storageRef);
       info.photo = imgURL;
       await repo.addPlantRepo(info, token);
     } catch (error) {
+      console.log("error");
       dispatch(setError((error as Error).message));
     }
   };
@@ -35,7 +37,7 @@ export function usePlants(repo: PlantsApiRepo) {
     try {
       const token = users.userLogged?.token;
       if (!token) {
-        throw new Error("You must to be logged");
+        throw new Error("You must be logged");
       }
       const actualPage = Math.floor(plants.plantList.length / 5);
       const result = await repo.getPlantsRepo(token, actualPage + 1);
@@ -48,7 +50,7 @@ export function usePlants(repo: PlantsApiRepo) {
   const updatePlant = async (id: string) => {
     try {
       const token = users.userLogged?.token;
-      if (!token) throw new Error("You must to be logged");
+      if (!token) throw new Error("You must be logged");
       const result = await repo.getPlantById(id, token);
       dispatch(changePlant(result));
     } catch (error) {
@@ -58,6 +60,8 @@ export function usePlants(repo: PlantsApiRepo) {
 
   const deletePlantById = async (id: string) => {
     try {
+      const token = users.userLogged?.token;
+      if (!token) throw new Error("You must be logged");
       await repo.deletePlantsRepo(id);
       dispatch(deletePlant(id));
     } catch (error) {
