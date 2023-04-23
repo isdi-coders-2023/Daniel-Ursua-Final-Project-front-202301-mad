@@ -18,6 +18,7 @@ export function AppRouter() {
         <Route path={"/plants"} element={<PlantList></PlantList>}></Route>
         <Route path={"/add"} element={<Add></Add>}></Route>
         <Route path={"/edit"} element={<Edit></Edit>}></Route>
+        <Route path={"*"} element={<Home></Home>}></Route>
       </Routes>
     </Suspense>
   );
