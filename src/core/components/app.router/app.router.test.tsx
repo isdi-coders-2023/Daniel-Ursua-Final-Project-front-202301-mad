@@ -16,7 +16,7 @@ describe("Given the app router component", () => {
             "/plants",
             "/add",
             "/edit",
-            "*",
+            "/DoesNotExist",
           ]}
           initialIndex={number}
         >
@@ -67,6 +67,13 @@ describe("Given the app router component", () => {
       await waitFor(async () => prepareTestFunction(5));
       const elements = await screen.findAllByRole("heading");
       expect(elements.length).toBe(2);
+    });
+  });
+  describe("When it is render and the path is any other unregistered route", () => {
+    test("Then, it should redirect to home and a h1 should be in the document", async () => {
+      prepareTestFunction(0);
+      const element = await screen.findByRole("heading");
+      expect(element).toBeInTheDocument();
     });
   });
 });
