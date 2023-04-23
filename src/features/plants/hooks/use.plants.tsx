@@ -28,7 +28,6 @@ export function usePlants(repo: PlantsApiRepo) {
       info.photo = imgURL;
       await repo.addPlantRepo(info, token);
     } catch (error) {
-      console.log("error");
       dispatch(setError((error as Error).message));
     }
   };
