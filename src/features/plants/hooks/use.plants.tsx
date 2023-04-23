@@ -18,7 +18,6 @@ export function usePlants(repo: PlantsApiRepo) {
   const users = useSelector((state: RootState) => state.users);
 
   const addPlant = async (info: ProtoPlant, file: File) => {
-    console.log("add");
     try {
       const token = users.userLogged?.token;
       if (!token) throw new Error("You must be logged");

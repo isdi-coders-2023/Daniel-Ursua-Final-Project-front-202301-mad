@@ -107,28 +107,28 @@ describe("Given the plantUsers Custom Hook, a PlantApiRepo mock and a TestCompon
   describe("And the add button is clicked", () => {
     test("Then, the add functions should be called", async () => {
       const addButton = await screen.findByText(/add/i);
-      await userEvent.click(addButton);
+      await act(async () => await userEvent.click(addButton));
       expect(mockRepo.addPlantRepo).toHaveBeenCalled();
     });
   });
   describe("And the get button is clicked", () => {
     test("Then, the getPlants function should be called", async () => {
       const getButton = await screen.findByText(/get/i);
-      await userEvent.click(getButton);
+      await act(async () => await userEvent.click(getButton));
       expect(mockRepo.getPlantsRepo).toHaveBeenCalled();
     });
   });
   describe("And the update button is clicked", () => {
     test("Then, the getById function should be called", async () => {
       const updateButton = await screen.findByText(/update/i);
-      await userEvent.click(updateButton);
+      await act(async () => await userEvent.click(updateButton));
       expect(mockRepo.getPlantById).toHaveBeenCalled();
     });
   });
   describe("And the delete button is clicked", () => {
     test("Then, the deletePlantsRepo function should be called", async () => {
       const deleteButton = await screen.findByText(/delete/i);
-      await userEvent.click(deleteButton);
+      await act(async () => await userEvent.click(deleteButton));
       expect(mockRepo.deletePlantsRepo).toHaveBeenCalled();
     });
   });
@@ -147,7 +147,7 @@ describe("Given the same components, but without token in the store", () => {
   describe("And the add method in the repo throw errors", () => {
     test("Add method should throw an error", async () => {
       const addButton = await screen.findByText(/add/i);
-      await userEvent.click(addButton);
+      await act(async () => await userEvent.click(addButton));
       const result = await mockStoreFail.getState().errors.message;
       expect(result).toBe("You must be logged");
     });
